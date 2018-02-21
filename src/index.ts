@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
 import * as converter from 'swagger2openapi';
+import * as compose from 'koa-compose';
 
 export class ValidationError extends Error {
   constructor(message: string, public status: number, public validationErrors?: any[]) {
@@ -13,12 +14,12 @@ export class ValidationError extends Error {
   }
 }
 
-export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
+export async function oas<T extends koa.BaseContext>(cfg: Partial<Config>): Promise<compose.Middleware<T>> {
 
   const config = validateConfig(cfg);
   const { compiled, doc } = await compileOas(config.swaggerFile);
 
-  return async (ctx: koa.Context, next: () => Promise<any>): Promise<void> => {
+  return async (ctx: T, next: () => Promise<any>): Promise<void> => {
 
     if (ctx.path === config.swaggerPath) {
       ctx.body = doc;
