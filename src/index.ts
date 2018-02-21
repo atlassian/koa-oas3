@@ -61,7 +61,7 @@ export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
 
 async function compileOas(file: string) {
   // Convert Swagger to OAS
-  const { openapi } = await converter.convertFile(file);
+  const { openapi } = await converter.convertFile(file, {});
 
   return {
     compiled: new ChowChow(openapi),
