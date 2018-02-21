@@ -44,7 +44,8 @@ export async function oas<T extends koa.BaseContext>(cfg: Partial<Config>): Prom
       header: ctx.request.header,
       query: ctx.request.query,
       path: ctx.params,
-      cookie: ctx.cookies
+      cookie: ctx.cookies,
+      body: ctx.request.body,
     })
 
     await next();
