@@ -1,7 +1,8 @@
 {
   "name": "koa-oas3",
   "version": "0.1.1",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.js",
   "author": "<tli@atlassian.com>",
   "license": "MIT",
   "scripts": {
