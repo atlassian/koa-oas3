@@ -1,0 +1,20 @@
+{
+  "name": "koa-oas3",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "<tli@atlassian.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo 'noooooooooooooo'",
+    "prepublishOnly": "rm -rf lib && tsc"
+  },
+  "dependencies": {
+    "@types/koa": "^2.0.44",
+    "oas3-chow-chow": "^0.2.5",
+    "swagger2openapi": "^2.11.16"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^3.10.1",
+    "typescript": "^2.7.2"
+  }
+}
