@@ -1,6 +1,6 @@
 {
   "name": "koa-oas3",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "lib/index.js",
   "types": "lib/index.d.js",
   "author": "<tli@atlassian.com>",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@types/koa": "^2.0.44",
-    "oas3-chow-chow": "^0.2.6",
+    "oas3-chow-chow": "^0.2.7",
     "swagger2openapi": "^2.11.16"
   },
   "devDependencies": {
