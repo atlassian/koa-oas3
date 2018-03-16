@@ -436,14 +436,15 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-oas3-chow-chow@^0.2.8:
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.2.8.tgz#07860fef8bf103134c1c8db07ebb9b93194ac197"
+oas3-chow-chow@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.3.1.tgz#8175a62c19fb1d1e1e6ca7e45bade2eb4d34e4ca"
   dependencies:
     ajv "^6.1.1"
     better-ajv-errors "^0.5.0-0"
     json-schema-deref-sync "^0.4.0"
     openapi3-ts "^0.7.0"
+    xregexp "^4.1.1"
 
 openapi3-ts@^0.7.0:
   version "0.7.0"
@@ -640,6 +641,10 @@ wrap-ansi@^2.0.0:
   dependencies:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
+
+xregexp@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/xregexp/-/xregexp-4.1.1.tgz#eb8a032aa028d403f7b1b22c47a5f16c24b21d8d"
 
 y18n@^3.2.1:
   version "3.2.1"
