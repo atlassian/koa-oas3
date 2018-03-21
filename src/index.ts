@@ -31,7 +31,7 @@ export async function catchValidationError(ctx: koa.BaseContext, next: () => Pro
   }
 }
 
-export async function oas<T extends koa.Context>(cfg: Partial<Config>): Promise<compose.Middleware<T>> {
+export async function oas<T extends koa.BaseContext>(cfg: Partial<Config>): Promise<compose.Middleware<T>> {
 
   const config = validateConfig(cfg);
   const { compiled, doc } = await compileOas(config.swaggerFile);
