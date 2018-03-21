@@ -436,9 +436,9 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-oas3-chow-chow@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.3.1.tgz#8175a62c19fb1d1e1e6ca7e45bade2eb4d34e4ca"
+oas3-chow-chow@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.3.2.tgz#5295657690bf0f82ce97516498f64d3fba08f6aa"
   dependencies:
     ajv "^6.1.1"
     better-ajv-errors "^0.5.0-0"

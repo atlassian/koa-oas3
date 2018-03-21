@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@types/koa": "^2.0.44",
-    "oas3-chow-chow": "^0.3.1",
+    "oas3-chow-chow": "^0.3.2",
     "swagger2openapi": "^2.11.16"
   },
   "devDependencies": {
