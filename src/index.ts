@@ -2,9 +2,6 @@ import * as koa from 'koa';
 import { Config, validateConfig } from './config';
 import ChowChow, { ChowError } from 'oas3-chow-chow';
 import { swaggerUI } from './swagger-ui';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as yaml from 'js-yaml';
 import * as converter from 'swagger2openapi';
 import * as compose from 'koa-compose';
 
@@ -31,7 +28,17 @@ export async function catchValidationError(ctx: koa.BaseContext, next: () => Pro
   }
 }
 
-export async function oas<T extends koa.BaseContext>(cfg: Partial<Config>): Promise<compose.Middleware<T>> {
+declare module 'koa' {
+  interface Context {
+    params?: any;
+  }
+
+  interface Request {
+    body?: any;
+  }
+}
+
+export async function oas<T extends koa.Context>(cfg: Partial<Config>): Promise<compose.Middleware<T>> {
 
   const config = validateConfig(cfg);
   const { compiled, doc } = await compileOas(config.swaggerFile);
