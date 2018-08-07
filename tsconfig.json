@@ -12,7 +12,7 @@
     "target": "es2017"
   },
   "exclude": [
-    "__test__",
+    "__tests__",
     "lib",
     "node_modules"
   ],
