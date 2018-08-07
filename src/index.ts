@@ -7,13 +7,23 @@ import * as jsonfile from 'jsonfile';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 
+declare module 'koa' {
+  interface Context {
+    params?: any;
+  }
+
+  interface Request extends koa.BaseRequest {
+    body?: any;
+  }
+}
+
 export class ValidationError extends Error {
   constructor(message: string, public status: number, public details?: any) {
     super(message);
   }
 }
 
-export async function catchValidationError(ctx: koa.BaseContext, next: () => Promise<any>): Promise<void> {
+export const catchValidationError: koa.Middleware = async (ctx: koa.Context, next: () => Promise<any>): Promise<void> => {
   try {
     await next();
   } catch (e) {
@@ -30,22 +40,12 @@ export async function catchValidationError(ctx: koa.BaseContext, next: () => Pro
   }
 }
 
-declare module 'koa' {
-  interface Context {
-    params?: any;
-  }
-
-  interface Request extends koa.BaseRequest {
-    body?: any;
-  }
-}
-
-export function oas<T extends koa.Context>(cfg: Partial<Config>): compose.Middleware<T> {
+export function oas(cfg: Partial<Config>): koa.Middleware {
 
   const config = validateConfig(cfg);
   const { compiled, doc } = compileOas(config.openapiFile);
 
-  return async (ctx: T, next: () => Promise<any>): Promise<void> => {
+  const mw: koa.Middleware = async (ctx: koa.Context, next: () => Promise<any>): Promise<void> => {
 
     if (ctx.path === config.openapiPath) {
       ctx.body = doc;
@@ -103,6 +103,7 @@ export function oas<T extends koa.Context>(cfg: Partial<Config>): compose.Middle
       }
     }
   };
+  return mw;
 }
 
 function compileOas(file: string) {
