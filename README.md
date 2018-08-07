@@ -44,16 +44,11 @@ app.listen(8080);
 ```
 
 ## oas(option)
-options:
 
-openapiFile: string;
-openapiPath: string;
-openapiUIPath: string;
-validateResponse: boolean;
-validatePaths: string[];
+###options:
 
 * `openapiFile` - The absolute path to your Openapi file
 * `openapiPath`(default: /openapi.json) - The endpoint for serving Openapi JSON
 * `openapiUIPath`:(default: /openapi.html) - The endpoint for serving Openapi UI
-* validateResponse:(default: false) - Validate response against Openapi schemas
-* validatePaths:(default ['/']) - Only endpoints starting with the values specified here will be validated
+* `validateResponse`:(default: false) - Validate response against Openapi schemas
+* `validatePaths`:(default ['/']) - Only endpoints starting with the values specified here will be validated
