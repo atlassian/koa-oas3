@@ -1,9 +1,9 @@
-export interface SwaggerUIConfig {
+export interface OpenapiUIConfig {
   title?: string;
   url: string;
 }
 
-export function swaggerUI(cfg: SwaggerUIConfig): string { return `
+export function openapiUI(cfg: OpenapiUIConfig): string { return `
 <!DOCTYPE html>
 <html lang="en">
 <head>

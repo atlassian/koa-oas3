@@ -1,19 +1,19 @@
 export interface Config {
-  swaggerFile: string;
-  swaggerPath: string;
-  swaggerUIPath: string;
+  openapiFile: string;
+  openapiPath: string;
+  openapiUIPath: string;
   validateResponse: boolean;
   validatePaths: string[];
 }
 
 export function validateConfig(cfg: Partial<Config>): Config {
-  if (!cfg.swaggerFile) {
-    throw new Error('You must configure a Swagger file');
+  if (!cfg.openapiFile) {
+    throw new Error('You must configure a Openapi File');
   }
   return {
-    swaggerFile: cfg.swaggerFile,
-    swaggerPath: cfg.swaggerPath || '/swagger.json',
-    swaggerUIPath: cfg.swaggerUIPath || '/swagger.html',
+    openapiFile: cfg.openapiFile,
+    openapiPath: cfg.openapiPath || '/openapi.json',
+    openapiUIPath: cfg.openapiUIPath || '/openapi.html',
     validateResponse: cfg.validateResponse || false,
     validatePaths: cfg.validatePaths || ['/'],
   };
