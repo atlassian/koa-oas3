@@ -27,7 +27,7 @@
   "dependencies": {
     "js-yaml": "^3.12.0",
     "jsonfile": "^4.0.0",
-    "oas3-chow-chow": "^0.6.1"
+    "oas3-chow-chow": "^0.6.2"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",

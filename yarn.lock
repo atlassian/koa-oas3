@@ -2588,9 +2588,9 @@ nwsapi@^2.0.7:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.0.8.tgz#e3603579b7e162b3dbedae4fb24e46f771d8fa24"
 
-oas3-chow-chow@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.6.1.tgz#aedb06e0ecd4075280dfb58b1ff6e9c9b07ef405"
+oas3-chow-chow@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.6.2.tgz#a198220c370e5d063f653dc5ac064c2f1417fc17"
   dependencies:
     ajv "^6.5.2"
     better-ajv-errors "^0.5.1"
