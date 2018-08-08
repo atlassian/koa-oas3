@@ -117,7 +117,7 @@ function compileOas(file: string) {
     }
     case file.endsWith('.yaml'):
     case file.endsWith('.yml'): {
-      const openApiObject = yaml.safeLoad(fs.readFileSync('/home/ixti/example.yml', 'utf8'));
+      const openApiObject = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
       return {
         compiled: new ChowChow(openApiObject),
         doc: openApiObject,
