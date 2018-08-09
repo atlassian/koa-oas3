@@ -52,13 +52,10 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
         body: ctx.request.body,
       })
     } catch (err) {
-      console.log(err)
       if (err instanceof ChowError) {
-        console.log('instanceof')
         const json = err.toJSON();
         ctx.throw(400, 'Request validation error', { expose: true, ...json });
       } else {
-        console.log('not instanceof')
         throw err;
       }
     }
