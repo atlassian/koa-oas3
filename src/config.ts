@@ -1,19 +1,37 @@
 export interface Config {
-  openapiFile: string;
-  openapiPath: string;
-  openapiUIPath: string;
+  /**
+   * Absolute path to Openapi Document
+   */
+  file: string;
+  /**
+   * Endpoint that serves raw Openapi Document in JSON
+   * default: /openapi.json
+   */
+  endpoint: string;
+  /**
+   * Endpoint that serves Openapi UI
+   * default: /openapi.html
+   */
+  uiEndpoint: string;
+  /**
+   * Validate the response
+   */
   validateResponse: boolean;
+  /**
+   * Whitelist paths for request validation
+   * default: ['/']
+   */
   validatePaths: string[];
 }
 
 export function validateConfig(cfg: Partial<Config>): Config {
-  if (!cfg.openapiFile) {
+  if (!cfg.file) {
     throw new Error('You must configure a Openapi File');
   }
   return {
-    openapiFile: cfg.openapiFile,
-    openapiPath: cfg.openapiPath || '/openapi.json',
-    openapiUIPath: cfg.openapiUIPath || '/openapi.html',
+    file: cfg.file,
+    endpoint: cfg.endpoint || '/openapi.json',
+    uiEndpoint: cfg.uiEndpoint || '/openapi.html',
     validateResponse: cfg.validateResponse || false,
     validatePaths: cfg.validatePaths || ['/'],
   };

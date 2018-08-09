@@ -16,16 +16,15 @@ The library would expect request body to be parsed under `ctx.request.body`. You
 
 ```ts
 import * as bodyParser from 'koa-bodyparser';
-import { oas } from 'koa-oas3';
+import { oas, catchValidationError } from 'koa-oas3';
 
 export function oas3() {
   return compose([
     catchValidationError,
     oas({
-      openapiFile: `${__dirname}/../openapi.yaml`,
-      openapiPath: '/openapi.json',
-      openapiUIPath: '/',
-      validateResponse: false
+      file: `${__dirname}/../openapi.yaml`,
+      endpoint: '/openapi.json',
+      uiEndpoint: '/'
     }),
   ]);
 }
@@ -34,21 +33,17 @@ export function oas3() {
 
 const app = new Koa();
 app.use(bodyParser());
-app.use(oas({
-  openapiFile: `${__dirname}/../openapi.yaml`,
-  openapiPath: '/openapi.json',
-  openapiUIPath: '/'
-}));
+app.use(oas3());
 
 app.listen(8080);
 ```
 
 ## oas(option)
 
-###options:
+### options:
 
-* `openapiFile` - The absolute path to your Openapi file
-* `openapiPath`(default: /openapi.json) - The endpoint for serving Openapi JSON
-* `openapiUIPath`:(default: /openapi.html) - The endpoint for serving Openapi UI
+* `file` - The absolute path to your Openapi file
+* `endpoint`(default: /openapi.json) - The endpoint for serving Openapi JSON
+* `uiEndpoint`:(default: /openapi.html) - The endpoint for serving Openapi UI
 * `validateResponse`:(default: false) - Validate response against Openapi schemas
 * `validatePaths`:(default ['/']) - Only endpoints starting with the values specified here will be validated

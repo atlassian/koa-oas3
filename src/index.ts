@@ -2,7 +2,6 @@ import * as koa from 'koa';
 import { Config, validateConfig } from './config';
 import ChowChow, { ChowError } from 'oas3-chow-chow';
 import { openapiUI } from './openapi-ui';
-import * as compose from 'koa-compose';
 import * as jsonfile from 'jsonfile';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
@@ -43,19 +42,19 @@ export const catchValidationError: koa.Middleware = async (ctx: koa.Context, nex
 export function oas(cfg: Partial<Config>): koa.Middleware {
 
   const config = validateConfig(cfg);
-  const { compiled, doc } = compileOas(config.openapiFile);
+  const { compiled, doc } = compileOas(config.file);
 
   const mw: koa.Middleware = async (ctx: koa.Context, next: () => Promise<any>): Promise<void> => {
 
-    if (ctx.path === config.openapiPath) {
+    if (ctx.path === config.endpoint) {
       ctx.body = doc;
       return;
     }
 
-    if (ctx.path === config.openapiUIPath) {
+    if (ctx.path === config.uiEndpoint) {
       ctx.body = openapiUI({
         title: doc.info ? doc.info.title : 'openapi UI',
-        url: config.openapiPath,
+        url: config.endpoint,
       });
       return;
     }
