@@ -5,6 +5,7 @@ import { openapiUI } from './openapi-ui';
 import * as jsonfile from 'jsonfile';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
+import * as oasValidator from 'oas-validator';
 
 declare module 'koa' {
   interface Context {
@@ -13,29 +14,6 @@ declare module 'koa' {
 
   interface Request extends koa.BaseRequest {
     body?: any;
-  }
-}
-
-export class ValidationError extends Error {
-  constructor(message: string, public status: number, public details?: any) {
-    super(message);
-  }
-}
-
-export const catchValidationError: koa.Middleware = async (ctx: koa.Context, next: () => Promise<any>): Promise<void> => {
-  try {
-    await next();
-  } catch (e) {
-    if (e instanceof ValidationError) {
-      ctx.status = e.status;
-      ctx.body = {
-        message: e.message,
-        code: e.status,
-        details: e.details,
-      };
-    } else {
-      throw e;
-    }
   }
 }
 
@@ -73,12 +51,12 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
         cookie: ctx.cookies,
         body: ctx.request.body,
       })
-    } catch (e) {
-      if (e instanceof ChowError) {
-        const json = e.toJSON();
-        throw new ValidationError(json.message || 'Request validation error', json.code || 400, json);
+    } catch (err) {
+      if (err instanceof ChowError) {
+        const json = err.toJSON();
+        ctx.throw(400, 'Request validation error', { expose: true, ...json });
       } else {
-        throw new ValidationError('Request validation error', 400);
+        throw err;
       }
     }
 
@@ -92,12 +70,12 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
           header: ctx.response.header,
           body: ctx.body
         })
-      } catch(e) {
-        if (e instanceof ChowError) {
-          const json = e.toJSON();
-          throw new ValidationError(json.message || 'Response validation error', 500, json);
+      } catch(err) {
+        if (err instanceof ChowError) {
+          const json = err.toJSON();
+          ctx.throw(400, 'Response validation error', { expose: true, ...json });
         } else {
-          throw new ValidationError('Response validation error', 500);
+          throw err;
         }
       }
     }
@@ -106,23 +84,23 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
 }
 
 function compileOas(file: string) {
+  let openApiObject: any;
   switch (true) {
     case file.endsWith('.json'): {
-      const openApiObject = jsonfile.readFileSync(file);
-      return {
-        compiled: new ChowChow(openApiObject),
-        doc: openApiObject,
-      };
+      openApiObject = jsonfile.readFileSync(file);
     }
     case file.endsWith('.yaml'):
     case file.endsWith('.yml'): {
-      const openApiObject = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
-      return {
-        compiled: new ChowChow(openApiObject),
-        doc: openApiObject,
-      };
+      openApiObject = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
     }
     default:
-      throw new ValidationError('Unsupported file format', 500);
+      throw new Error('Unsupported file format');
   }
+  if (!oasValidator.validateSync(openApiObject)) {
+    throw new Error('Invalid Openapi document');
+  }
+  return {
+    compiled: new ChowChow(openApiObject),
+    doc: openApiObject,
+  };
 }
