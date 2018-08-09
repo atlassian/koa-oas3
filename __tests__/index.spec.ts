@@ -1,12 +1,12 @@
-import { oas, ValidationError } from '../src';
+import { oas } from '../src';
 import * as Sinon from 'sinon';
 import * as path from 'path';
 
 describe('Koa Oas3', () => {
   const mw = oas({
-    openapiFile: path.resolve('./__tests__/fixtures/pet-store.json'),
-    openapiPath: '/openapi',
-    openapiUIPath: '/openapi.html',
+    file: path.resolve('./__tests__/fixtures/pet-store.json'),
+    endpoint: '/openapi',
+    uiEndpoint: '/openapi.html',
     validatePaths: ['/pets']
   });
 

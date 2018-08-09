@@ -52,10 +52,13 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
         body: ctx.request.body,
       })
     } catch (err) {
+      console.log(err)
       if (err instanceof ChowError) {
+        console.log('instanceof')
         const json = err.toJSON();
         ctx.throw(400, 'Request validation error', { expose: true, ...json });
       } else {
+        console.log('not instanceof')
         throw err;
       }
     }
@@ -88,15 +91,17 @@ function compileOas(file: string) {
   switch (true) {
     case file.endsWith('.json'): {
       openApiObject = jsonfile.readFileSync(file);
+      break;
     }
     case file.endsWith('.yaml'):
     case file.endsWith('.yml'): {
       openApiObject = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+      break;
     }
     default:
       throw new Error('Unsupported file format');
   }
-  if (!oasValidator.validateSync(openApiObject)) {
+  if (!oasValidator.validateSync(openApiObject, {})) {
     throw new Error('Invalid Openapi document');
   }
   return {
