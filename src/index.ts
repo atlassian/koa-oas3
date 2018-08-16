@@ -7,22 +7,16 @@ import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as oasValidator from 'oas-validator';
 
-declare module 'koa' {
-  interface Context {
-    params?: any;
-  }
-
-  interface Request extends koa.BaseRequest {
-    body?: any;
-  }
-}
+type RequestWithBody = koa.BaseRequest & {
+  body?: any;
+};
 
 export function oas(cfg: Partial<Config>): koa.Middleware {
 
   const config = validateConfig(cfg);
   const { compiled, doc } = compileOas(config.file);
 
-  const mw: koa.Middleware = async (ctx: koa.Context, next: () => Promise<any>): Promise<void> => {
+  const mw: koa.Middleware = async (ctx: koa.Context & { params?: any }, next: () => Promise<any>): Promise<void> => {
 
     if (ctx.path === config.endpoint) {
       ctx.body = doc;
@@ -49,7 +43,7 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
         query: ctx.request.query,
         path: ctx.params,
         cookie: ctx.cookies,
-        body: ctx.request.body,
+        body: (ctx.request as RequestWithBody).body,
       })
     } catch (err) {
       if (err instanceof ChowError) {
