@@ -22,6 +22,10 @@ export interface Config {
    * default: ['/']
    */
   validatePaths: string[];
+  /**
+   * Optional base path to swagger ui bundle
+   */
+  swaggerUi: string;
 }
 
 export function validateConfig(cfg: Partial<Config>): Config {
@@ -34,5 +38,6 @@ export function validateConfig(cfg: Partial<Config>): Config {
     uiEndpoint: cfg.uiEndpoint || '/openapi.html',
     validateResponse: cfg.validateResponse || false,
     validatePaths: cfg.validatePaths || ['/'],
+    swaggerUi: cfg.swaggerUi || '//unpkg.com/swagger-ui-dist@3'
   };
 }

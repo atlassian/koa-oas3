@@ -27,6 +27,7 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
       ctx.body = openapiUI({
         title: doc.info ? doc.info.title : 'openapi UI',
         url: config.endpoint,
+        swaggerUi: config.swaggerUi
       });
       return;
     }
