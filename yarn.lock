@@ -2608,9 +2608,9 @@ oas-validator@^1.1.7:
     reftools "^1.0.2"
     should "^13.2.1"
 
-oas3-chow-chow@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.7.1.tgz#4f33d4e473445618fb3a5026aa8a0d0e085281ba"
+oas3-chow-chow@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.8.1.tgz#1894a77438dfe0822bc1bcb821d915b8b4302bda"
   dependencies:
     ajv "^6.5.2"
     better-ajv-errors "^0.5.1"
