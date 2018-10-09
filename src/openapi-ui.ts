@@ -1,7 +1,7 @@
 export interface OpenapiUIConfig {
   title?: string;
   url: string;
-  swaggerUi: string;
+  swaggerUiBundleBasePath: string;
 }
 
 export function openapiUI(cfg: OpenapiUIConfig): string { return `
@@ -9,7 +9,7 @@ export function openapiUI(cfg: OpenapiUIConfig): string { return `
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <base href="${cfg.swaggerUi}">
+  <base href="${cfg.swaggerUiBundleBasePath}">
   <title>${cfg.title || 'Swagger UI'}</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./swagger-ui.css" >
