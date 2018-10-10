@@ -38,4 +38,4 @@ app.listen(8080);
 * `uiEndpoint`:(default: /openapi.html) - The endpoint for serving Openapi UI
 * `validateResponse`:(default: false) - Validate response against Openapi schemas
 * `validatePaths`:(default ['/']) - Only endpoints starting with the values specified here will be validated
-* `errorHandler`: Optional - custom error hanlder.
+* `errorHandler: (error: Error, ctx: Context) => void,`: Optional - custom error hanlder.

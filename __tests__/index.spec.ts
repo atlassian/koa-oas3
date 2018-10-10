@@ -86,7 +86,7 @@ describe('Koa Oas3', () => {
       }
     }
     const next = jest.fn();
-    const errorHandler = jest.fn(() => {});
+    const errorHandler = jest.fn((err) => { throw err });
     const mw = oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',

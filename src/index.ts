@@ -46,15 +46,7 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
         body: (ctx.request as RequestWithBody).body,
       })
     } catch (err) {
-      if (config.errorHandler) {
-        config.errorHandler(err);
-      }
-      if (err instanceof ChowError) {
-        const json = err.toJSON();
-        ctx.throw(400, 'Request validation error', { expose: true, ...json });
-      } else {
-        throw err;
-      }
+      config.errorHandler(err, ctx);
     }
 
     await next();
@@ -68,15 +60,7 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
           body: ctx.body
         })
       } catch(err) {
-        if (config.errorHandler) {
-          config.errorHandler(err);
-        }
-        if (err instanceof ChowError) {
-          const json = err.toJSON();
-          ctx.throw(400, 'Response validation error', { expose: true, ...json });
-        } else {
-          throw err;
-        }
+        config.errorHandler(err, ctx);
       }
     }
   };

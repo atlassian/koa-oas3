@@ -1,3 +1,6 @@
+import { ChowError } from 'oas3-chow-chow';
+import { Context } from 'koa';
+
 export interface Config {
   /**
    * Absolute path to Openapi Document
@@ -23,7 +26,16 @@ export interface Config {
    */
   validatePaths: string[];
 
-  errorHandler?: (error: Error) => {};
+  errorHandler: (error: Error, ctx: Context)=> void,
+}
+
+function defaultErrorHandler(err: Error, ctx: Context) {
+  if (err instanceof ChowError) {
+    const json = err.toJSON();
+    ctx.throw(400, 'Request validation error', { expose: true, ...json });
+  } else {
+    throw err;
+  }
 }
 
 export function validateConfig(cfg: Partial<Config>): Config {
@@ -36,6 +48,6 @@ export function validateConfig(cfg: Partial<Config>): Config {
     uiEndpoint: cfg.uiEndpoint || '/openapi.html',
     validateResponse: cfg.validateResponse || false,
     validatePaths: cfg.validatePaths || ['/'],
-    errorHandler: cfg.errorHandler,
+    errorHandler: cfg.errorHandler || defaultErrorHandler,
   };
 }
