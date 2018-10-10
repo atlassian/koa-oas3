@@ -22,6 +22,8 @@ export interface Config {
    * default: ['/']
    */
   validatePaths: string[];
+
+  errorHandler?: (error: Error) => {};
 }
 
 export function validateConfig(cfg: Partial<Config>): Config {
@@ -34,5 +36,6 @@ export function validateConfig(cfg: Partial<Config>): Config {
     uiEndpoint: cfg.uiEndpoint || '/openapi.html',
     validateResponse: cfg.validateResponse || false,
     validatePaths: cfg.validatePaths || ['/'],
+    errorHandler: cfg.errorHandler,
   };
 }
