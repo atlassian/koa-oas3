@@ -26,6 +26,14 @@ export interface Config {
    */
   validatePaths: string[];
 
+  /**
+   * Optional base path to swagger ui bundle
+   */
+  swaggerUiBundleBasePath: string;
+
+  /**
+   * Optional custom error handler
+   */
   errorHandler: (error: Error, ctx: Context)=> void,
 }
 
@@ -48,6 +56,7 @@ export function validateConfig(cfg: Partial<Config>): Config {
     uiEndpoint: cfg.uiEndpoint || '/openapi.html',
     validateResponse: cfg.validateResponse || false,
     validatePaths: cfg.validatePaths || ['/'],
+    swaggerUiBundleBasePath: cfg.swaggerUiBundleBasePath || '//unpkg.com/swagger-ui-dist@3',
     errorHandler: cfg.errorHandler || defaultErrorHandler,
   };
 }
