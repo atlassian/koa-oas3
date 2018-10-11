@@ -16,24 +16,15 @@ The library would expect request body to be parsed under `ctx.request.body`. You
 
 ```ts
 import * as bodyParser from 'koa-bodyparser';
-import { oas, catchValidationError } from 'koa-oas3';
-
-export function oas3() {
-  return compose([
-    catchValidationError,
-    oas({
-      file: `${__dirname}/../openapi.yaml`,
-      endpoint: '/openapi.json',
-      uiEndpoint: '/'
-    }),
-  ]);
-}
-
-...
+import { oas } from 'koa-oas3';
 
 const app = new Koa();
 app.use(bodyParser());
-app.use(oas3());
+app.use(oas({
+  file: `${__dirname}/../openapi.yaml`,
+  endpoint: '/openapi.json',
+  uiEndpoint: '/'
+});
 
 app.listen(8080);
 ```
@@ -48,3 +39,4 @@ app.listen(8080);
 * `validateResponse`:(default: false) - Validate response against Openapi schemas
 * `validatePaths`:(default ['/']) - Only endpoints starting with the values specified here will be validated
 * `swaggerUiBundleBasePath`: (default use swagger-ui-dist from [unpkg](https://unpkg.com/)) - [swaggerUiAssetPath](https://www.npmjs.com/package/swagger-ui-dist) needed for loading the swagger-ui
+* `errorHandler: (error: Error, ctx: Context) => void,`: Optional - custom error hanlder.
