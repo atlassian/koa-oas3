@@ -40,10 +40,9 @@ export interface Config {
 function defaultErrorHandler(err: Error, ctx: Context) {
   if (err instanceof ChowError) {
     const json = err.toJSON();
-    ctx.throw(400, 'Request validation error', { expose: true, ...json });
-  } else {
-    throw err;
+    ctx.throw(400, err.message, { expose: true, ...json });
   }
+  throw err;
 }
 
 export function validateConfig(cfg: Partial<Config>): Config {
