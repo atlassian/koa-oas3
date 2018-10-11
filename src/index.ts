@@ -1,11 +1,13 @@
 import * as koa from 'koa';
 import { Config, validateConfig } from './config';
-import ChowChow, { ChowError } from 'oas3-chow-chow';
+import ChowChow, { ChowError, RequestValidationError, ResponseValidationError  } from 'oas3-chow-chow';
 import { openapiUI } from './openapi-ui';
 import * as jsonfile from 'jsonfile';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as oasValidator from 'oas-validator';
+
+export { ChowError, RequestValidationError, ResponseValidationError };
 
 type RequestWithBody = koa.BaseRequest & {
   body?: any;

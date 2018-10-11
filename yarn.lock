@@ -3013,10 +3013,10 @@ oas-validator@^1.1.7:
     reftools "^1.0.2"
     should "^13.2.1"
 
-oas3-chow-chow@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.9.0.tgz#a08b64ee499e846258bdc008f868ea1e7b6b9e81"
-  integrity sha512-O0xrWcJh1cn4Qhxiy0SRjaImoxa7oLFNTZTIjcia90ntCtXQeFeIPcHj4+y879Z6jUgz808sahw5rYo8BhLelg==
+oas3-chow-chow@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-0.9.1.tgz#21cd63229b833f0145cad585a4b3231cd621a325"
+  integrity sha512-CYtpoikOFEr6wS1q8w4tcx7ho3HNXymVQSss48qIH9VCkhTzKBhiY0HK1LAV1eZrxSQrVxacbMoXdMfgIuyI7g==
   dependencies:
     ajv "^6.5.4"
     better-ajv-errors "^0.6.0"
