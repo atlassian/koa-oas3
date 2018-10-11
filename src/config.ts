@@ -55,7 +55,7 @@ export function validateConfig(cfg: Partial<Config>): Config {
     uiEndpoint: cfg.uiEndpoint || '/openapi.html',
     validateResponse: cfg.validateResponse || false,
     validatePaths: cfg.validatePaths || ['/'],
-    swaggerUiBundleBasePath: cfg.swaggerUiBundleBasePath || '//unpkg.com/swagger-ui-dist@3',
+    swaggerUiBundleBasePath: cfg.swaggerUiBundleBasePath || '//unpkg.com/swagger-ui-dist@3/',
     errorHandler: cfg.errorHandler || defaultErrorHandler,
   };
 }
