@@ -27,8 +27,8 @@
   "dependencies": {
     "js-yaml": "^3.12.0",
     "jsonfile": "^4.0.0",
-    "oas-validator": "^1.1.7",
-    "oas3-chow-chow": "^0.9.1"
+    "oas-validator": "^1.1.13",
+    "oas3-chow-chow": "^0.13.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.5",
