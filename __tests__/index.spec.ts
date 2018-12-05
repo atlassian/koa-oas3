@@ -51,6 +51,24 @@ describe('Koa Oas3', () => {
     expect(next.mock.calls.length).toBe(1);
   })
 
+  test('It should coerce values if validation passed', async () => {
+    const ctx: any = {
+      path: '/pets',
+      request: {
+        header: {
+          'accept': 'application/json'
+        },
+        query: {
+          limit: '10'
+        },
+        method: 'get'
+      }
+    };
+    const next = jest.fn();
+    await mw(ctx, next);
+    expect(ctx.query.limit).toEqual(10);
+  });
+
   test('It should throw ValidationError if validation failed', () => {
     const ctx: any = {
       path: '/pets',
