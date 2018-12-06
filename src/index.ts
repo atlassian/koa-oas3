@@ -1,6 +1,6 @@
 import * as koa from 'koa';
 import { Config, validateConfig } from './config';
-import ChowChow, { ChowError, RequestValidationError, ResponseValidationError  } from 'oas3-chow-chow';
+import ChowChow, { ChowError, RequestValidationError, ResponseValidationError } from 'oas3-chow-chow';
 import { openapiUI } from './openapi-ui';
 import * as jsonfile from 'jsonfile';
 import * as yaml from 'js-yaml';
@@ -12,6 +12,21 @@ export { ChowError, RequestValidationError, ResponseValidationError };
 type RequestWithBody = koa.BaseRequest & {
   body?: any;
 };
+
+export type Oas = {
+  request: {
+    query?: any;
+    header?: any;
+    params?: any;
+  };
+}
+
+declare module 'koa' {
+  interface Context {
+    oas?: Oas;
+  }
+}
+
 
 export function oas(cfg: Partial<Config>): koa.Middleware {
 
@@ -49,13 +64,14 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
         body: (ctx.request as RequestWithBody).body,
       });
 
-      // Use coerced values
-      if (validRequest && validRequest.query) {
-        ctx.query = ctx.request.query = validRequest.query;
-      }
-      if (validRequest && validRequest.path && validRequest.path.params) {
-        ctx.params = validRequest.path.params;
-      }
+      // Store coerced values
+      ctx.oas = {
+        request: {
+          query: validRequest.query,
+          params: validRequest.path && validRequest.path.params,
+          header: validRequest.header
+        }
+      };
 
     } catch (err) {
       config.errorHandler(err, ctx);

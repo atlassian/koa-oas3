@@ -66,7 +66,7 @@ describe('Koa Oas3', () => {
     };
     const next = jest.fn();
     await mw(ctx, next);
-    expect(ctx.query.limit).toEqual(10);
+    expect(ctx.oas.request.query.limit).toBe(10);
   });
 
   test('It should throw ValidationError if validation failed', () => {
