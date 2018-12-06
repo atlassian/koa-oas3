@@ -40,14 +40,23 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
     }
 
     try {
-      compiled.validateRequest(ctx.path, {
+      const validRequest = compiled.validateRequest(ctx.path, {
         method: ctx.request.method,
         header: ctx.request.header,
         query: ctx.request.query,
         path: ctx.params,
         cookie: ctx.cookies,
         body: (ctx.request as RequestWithBody).body,
-      })
+      });
+
+      // Use coerced values
+      if (validRequest && validRequest.query) {
+        ctx.query = ctx.request.query = validRequest.query;
+      }
+      if (validRequest && validRequest.path && validRequest.path.params) {
+        ctx.params = validRequest.path.params;
+      }
+
     } catch (err) {
       config.errorHandler(err, ctx);
     }
