@@ -16,7 +16,7 @@ type RequestWithBody = koa.BaseRequest & {
 export function oas(cfg: Partial<Config>): koa.Middleware {
 
   const config = validateConfig(cfg);
-  const { compiled, doc } = compileOas(config.file);
+  const { compiled, doc } = compileOas(config);
 
   const mw: koa.Middleware = async (ctx: koa.Context & { params?: any }, next: () => Promise<any>): Promise<void> => {
 
@@ -79,21 +79,24 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
   return mw;
 }
 
-function compileOas(file: string) {
-  let openApiObject: any;
-  switch (true) {
-    case file.endsWith('.json'): {
-      openApiObject = jsonfile.readFileSync(file);
-      break;
+function loadFromFile(file?: string) {
+    if (!file) {
+        throw new Error("Missing file path");
     }
-    case file.endsWith('.yaml'):
-    case file.endsWith('.yml'): {
-      openApiObject = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
-      break;
+    switch (true) {
+        case file.endsWith('.json'): {
+            return jsonfile.readFileSync(file);
+        }
+        case file.endsWith('.yml') || file.endsWith('.yaml'): {
+            return yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+        }
+        default:
+            throw new Error('Unsupported file format');
     }
-    default:
-      throw new Error('Unsupported file format');
-  }
+}
+
+function compileOas(config: Config) {
+  let openApiObject: any = config.spec || loadFromFile(config.file);
   if (!oasValidator.validateSync(openApiObject, {})) {
     throw new Error('Invalid Openapi document');
   }

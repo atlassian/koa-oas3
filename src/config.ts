@@ -5,7 +5,11 @@ export interface Config {
   /**
    * Absolute path to Openapi Document
    */
-  file: string;
+  file?: string;
+  /**
+   * Openapi document as a javascript object
+   */
+  spec?: object,
   /**
    * Endpoint that serves raw Openapi Document in JSON
    * default: /openapi.json
@@ -46,11 +50,12 @@ function defaultErrorHandler(err: Error, ctx: Context) {
 }
 
 export function validateConfig(cfg: Partial<Config>): Config {
-  if (!cfg.file) {
-    throw new Error('You must configure a Openapi File');
+  if (!cfg.file && !cfg.spec) {
+    throw new Error('You must configure a Openapi File or a OpenAPIObject object');
   }
   return {
     file: cfg.file,
+    spec: cfg.spec,
     endpoint: cfg.endpoint || '/openapi.json',
     uiEndpoint: cfg.uiEndpoint || '/openapi.html',
     validateResponse: cfg.validateResponse || false,
