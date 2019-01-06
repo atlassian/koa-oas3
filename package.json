@@ -1,6 +1,6 @@
 {
   "name": "koa-oas3",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "main": "lib/index.js",
   "types": "lib/index.d.js",
   "author": "<tli@atlassian.com>",
