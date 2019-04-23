@@ -11,6 +11,10 @@ export interface Config {
    */
   spec?: object,
   /**
+   * Whether to enable OpenAPI UI display and OpenAPI doc display
+   */
+  enableUi?: boolean,
+  /**
    * Endpoint that serves raw Openapi Document in JSON
    * default: /openapi.json
    */
@@ -29,12 +33,10 @@ export interface Config {
    * default: ['/']
    */
   validatePaths: string[];
-
   /**
    * Optional base path to swagger ui bundle
    */
   swaggerUiBundleBasePath: string;
-
   /**
    * Optional custom error handler
    */
@@ -56,6 +58,7 @@ export function validateConfig(cfg: Partial<Config>): Config {
   return {
     file: cfg.file,
     spec: cfg.spec,
+    enableUi: cfg.enableUi !== undefined ? cfg.enableUi : true,
     endpoint: cfg.endpoint || '/openapi.json',
     uiEndpoint: cfg.uiEndpoint || '/openapi.html',
     validateResponse: cfg.validateResponse || false,

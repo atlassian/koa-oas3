@@ -35,6 +35,7 @@ app.listen(8080);
 
 * `file` - The absolute path to your Openapi file
 * `spec` - javascript object defining the api, either this or `file` must be given.
+* `enableUi`(default: true) - Whether to enable serving Openapi JSON and UI
 * `endpoint`(default: /openapi.json) - The endpoint for serving Openapi JSON
 * `uiEndpoint`:(default: /openapi.html) - The endpoint for serving Openapi UI
 * `validateResponse`:(default: false) - Validate response against Openapi schemas
