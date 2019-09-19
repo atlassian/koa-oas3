@@ -181,4 +181,72 @@ describe('Koa Oas3', () => {
     expect(bodyHandler).toHaveBeenCalled();
     expect(anotherBodyHandler).not.toHaveBeenCalled();
   });
+
+  test('It should not pick any body handler if it is NOT defined in the schema', async () => {
+    const ctx = createContext({
+      url: '/pets/123',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/xml'
+      },
+      method: 'POST',
+      body: {
+        id: 1,
+        tag: 'tag',
+        name: 'name'
+      }
+    });
+    const next = jest.fn();
+    const bodyHandler = jest.fn().mockImplementation(bodyParser({
+      extendTypes: {
+        json: ['application/xml']
+      },
+      enableTypes: ['json']
+    }));
+    const mw = oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      requestBodyHandler: {
+        'application/xml': bodyHandler,
+      }
+    });
+    await expect(mw(ctx, next)).resolves.toEqual(undefined);
+    expect(bodyHandler).not.toHaveBeenCalled();
+  });
+
+  test('It should not pick any body handler if it is NOT defined in the config', async () => {
+    const ctx = createContext({
+      url: '/pets/123',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'audio/aac'
+      },
+      method: 'PUT',
+      body: {
+        id: 1,
+        tag: 'tag',
+        name: 'name'
+      }
+    });
+    const next = jest.fn();
+    const bodyHandler = jest.fn().mockImplementation(bodyParser({
+      extendTypes: {
+        json: ['application/json']
+      },
+      enableTypes: ['json']
+    }));
+    const mw = oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      requestBodyHandler: {
+        'application/json': bodyHandler,
+      }
+    });
+    await expect(mw(ctx, next)).resolves.toEqual(undefined);
+    expect(bodyHandler).not.toHaveBeenCalled();
+  });
 })
