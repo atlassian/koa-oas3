@@ -96,7 +96,6 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
 
     const middlewares: Array<koa.Middleware> = [];
     const requestContentTypes = compiled.getDefinedRequestBodyContentType(ctx.path, ctx.request.method);
-    // const matchedContentType = reqContentTypeIs(ctx.req, requestContentTypes);
     const matchedContentType = ctx.request.is(requestContentTypes);
     if (config.requestBodyHandler && matchedContentType && typeof matchedContentType === 'string') {
       // We need to find the most specific matched handler
