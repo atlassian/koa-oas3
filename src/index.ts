@@ -6,7 +6,6 @@ import * as jsonfile from 'jsonfile';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as oasValidator from 'oas-validator';
-import * as reqContentTypeIs from 'type-is';
 import * as compose from 'koa-compose';
 
 export { ChowError, RequestValidationError, ResponseValidationError };
@@ -92,13 +91,14 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
 
     if (!config.validatePaths.some(path => ctx.path.startsWith(path))) {
       // Skip validation if no path matches
-      return await next();
+      return next();
     }
 
     const middlewares: Array<koa.Middleware> = [];
     const requestContentTypes = compiled.getDefinedRequestBodyContentType(ctx.path, ctx.request.method);
-    const matchedContentType = reqContentTypeIs(ctx.req, requestContentTypes);
-    if (config.requestBodyHandler && matchedContentType) {
+    // const matchedContentType = reqContentTypeIs(ctx.req, requestContentTypes);
+    const matchedContentType = ctx.request.is(requestContentTypes);
+    if (config.requestBodyHandler && matchedContentType && typeof matchedContentType === 'string') {
       // We need to find the most specific matched handler
       const parts = matchedContentType.split('/');
       if (config.requestBodyHandler[matchedContentType]) {
@@ -113,7 +113,7 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
     }
 
     middlewares.push(validatorMW);
-    compose(middlewares)(ctx, next);
+    await compose(middlewares).call(this, ctx, next);
   }
 
   return composedMW;
