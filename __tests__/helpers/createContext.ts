@@ -22,6 +22,11 @@ export function createContext(req: httpMock.RequestOptions, res?: httpMock.Respo
   });
 
   if (req.body) {
+    /**
+     * .send() method will emit the data event straight away, however,
+     * we want it to be fired only after we have attached all the event
+     * listerners.
+     */ 
     process.nextTick(() => {
       mockedReq.send(req.body);
     })
