@@ -15,7 +15,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testRegex": "(/__tests__/.*(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -27,6 +27,8 @@
   "dependencies": {
     "js-yaml": "^3.13.1",
     "jsonfile": "^5.0.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compose": "^4.1.0",
     "oas-validator": "^3.3.1",
     "oas3-chow-chow": "^0.16.1"
   },
@@ -35,10 +37,12 @@
     "@types/js-yaml": "^3.12.1",
     "@types/jsonfile": "^5.0.0",
     "@types/koa": "^2.0.49",
+    "@types/koa-bodyparser": "^4.3.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "koa": "^2.8.1",
+    "node-mocks-http": "^1.8.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"
   },

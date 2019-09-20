@@ -6,6 +6,7 @@ import * as jsonfile from 'jsonfile';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as oasValidator from 'oas-validator';
+import * as compose from 'koa-compose';
 
 export { ChowError, RequestValidationError, ResponseValidationError };
 
@@ -33,27 +34,7 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
   const config = validateConfig(cfg);
   const { compiled, doc } = compileOas(config);
 
-  const mw: koa.Middleware = async (ctx: koa.Context & { params?: any }, next: () => Promise<any>): Promise<void> => {
-
-    if (config.enableUi && ctx.path === config.endpoint) {
-      ctx.body = doc;
-      return;
-    }
-
-    if (config.enableUi && ctx.path === config.uiEndpoint) {
-      ctx.body = openapiUI({
-        title: doc.info ? doc.info.title : 'openapi UI',
-        url: config.endpoint,
-        swaggerUiBundleBasePath: config.swaggerUiBundleBasePath
-      });
-      return;
-    }
-
-    if (!config.validatePaths.some(path => ctx.path.startsWith(path))) {
-      // Skip validation if no path matches
-      return await next();
-    }
-
+  const validatorMW: koa.Middleware = async (ctx: koa.Context & { params?: any }, next: () => Promise<any>): Promise<void> => {
     try {
       const validRequest = compiled.validateRequest(ctx.path, {
         method: ctx.request.method,
@@ -92,7 +73,49 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
       }
     }
   };
-  return mw;
+
+  const composedMW: koa.Middleware = async (ctx: koa.Context & { params?: any }, next: () => Promise<any>): Promise<void> => {
+    if (config.enableUi && ctx.path === config.endpoint) {
+      ctx.body = doc;
+      return;
+    }
+
+    if (config.enableUi && ctx.path === config.uiEndpoint) {
+      ctx.body = openapiUI({
+        title: doc.info ? doc.info.title : 'openapi UI',
+        url: config.endpoint,
+        swaggerUiBundleBasePath: config.swaggerUiBundleBasePath
+      });
+      return;
+    }
+
+    if (!config.validatePaths.some(path => ctx.path.startsWith(path))) {
+      // Skip validation if no path matches
+      return next();
+    }
+
+    const middlewares: Array<koa.Middleware> = [];
+    const requestContentTypes = compiled.getDefinedRequestBodyContentType(ctx.path, ctx.request.method);
+    const matchedContentType = ctx.request.is(requestContentTypes);
+    if (config.requestBodyHandler && matchedContentType && typeof matchedContentType === 'string') {
+      // We need to find the most specific matched handler
+      const parts = matchedContentType.split('/');
+      if (config.requestBodyHandler[matchedContentType]) {
+        middlewares.push(config.requestBodyHandler[matchedContentType]);  // For a specific match like `application/json`
+      } else if (config.requestBodyHandler[`${parts[0]}/*`]) {
+        middlewares.push(config.requestBodyHandler[`${parts[0]}/*`]);  // For a match like `application/*`
+      } else if (config.requestBodyHandler[`*/${parts[1]}`]) {
+        middlewares.push(config.requestBodyHandler[`*/${parts[1]}`]);  // For a match like `*/json`
+      } else if (config.requestBodyHandler['*/*']) {
+        middlewares.push(config.requestBodyHandler['*/*']);  // For a global type match defined as `*/*`
+      }
+    }
+
+    middlewares.push(validatorMW);
+    await compose(middlewares).call(this, ctx, next);
+  }
+
+  return composedMW;
 }
 
 function loadFromFile(file?: string) {

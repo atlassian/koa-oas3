@@ -1,5 +1,6 @@
 import { ChowError } from 'oas3-chow-chow';
-import { Context } from 'koa';
+import * as bodyParser from 'koa-bodyparser';
+import { Context, Middleware } from 'koa';
 
 export interface Config {
   /**
@@ -41,6 +42,18 @@ export interface Config {
    * Optional custom error handler
    */
   errorHandler: (error: Error, ctx: Context)=> void,
+  /**
+   * Body handlers to different request content-types
+   * default:
+   * {
+   *  'application/json': bodyParser.json(),
+      'text/*': bodyParser.text({ type: 'text/*'}),
+      'application/x-www-form-urlencoded': bodyParser.urlencoded({extended: true})
+   * }
+   */
+  requestBodyHandler?: {
+    [key: string]: Middleware
+  };
 }
 
 function defaultErrorHandler(err: Error, ctx: Context) {
@@ -65,5 +78,25 @@ export function validateConfig(cfg: Partial<Config>): Config {
     validatePaths: cfg.validatePaths || ['/'],
     swaggerUiBundleBasePath: cfg.swaggerUiBundleBasePath || '//unpkg.com/swagger-ui-dist@3/',
     errorHandler: cfg.errorHandler || defaultErrorHandler,
+    requestBodyHandler: cfg.requestBodyHandler || {
+      'application/json': bodyParser({
+        extendTypes: {
+          json: ['application/json']
+        },
+        enableTypes: ['json']
+      }),
+      'text/*': bodyParser({
+        extendTypes: {
+          text: ['text/*']
+        },
+        enableTypes: ['text']
+      }),
+      'application/x-www-form-urlencoded': bodyParser({
+        extendTypes: {
+          form: ['application/x-www-form-urlencoded']
+        },
+        enableTypes: ['form']
+      })
+    }
   };
 }
