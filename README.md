@@ -12,7 +12,7 @@ yarn add koa-oas3
 ```
 
 # API
-The library would expect request body to be parsed under `ctx.request.body`. You can use `koa-bodyparser` package for that.
+By default, this library will use `koa-bodyparser` to parse request body. See config of `requestBodyHandler`.
 
 ```ts
 import * as bodyParser from 'koa-bodyparser';
