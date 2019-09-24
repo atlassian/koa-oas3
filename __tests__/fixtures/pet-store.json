@@ -109,6 +109,28 @@
             }
           }
         }
+      },
+      "put": {
+        "summary": "Create an empty pet",
+        "operationId": "createEmptyPets",
+        "tags": [
+          "pets"
+        ],
+        "responses": {
+          "201": {
+            "description": "Null response"
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/pets/{petId}": {
