@@ -33,6 +33,7 @@
     "oas3-chow-chow": "^0.16.1"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.0.3",
     "@types/jest": "^24.0.18",
     "@types/js-yaml": "^3.12.1",
     "@types/jsonfile": "^5.0.0",

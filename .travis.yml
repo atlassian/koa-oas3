@@ -1,11 +1,3 @@
 language: node_js
 node_js:
   - "node"
-deploy:
-  provider: npm
-  email: tongli0809@gmail.com
-  api_key: $NPM_TOKEN
-  skip_cleanup: true
-  on:
-    tags: true
-    branch: master
