@@ -33,7 +33,7 @@ describe('Koa Oas3', () => {
     await mw(ctx, next);
     expect(next.mock.calls.length).toBe(0);
     expect(ctx.body).toContain('<!DOCTYPE html>');
-  })
+  });
 
   test('It should pass the middleware if validation passed', async () => {
     const ctx = createContext({
@@ -53,11 +53,11 @@ describe('Koa Oas3', () => {
     const next = jest.fn();
     await mw(ctx, next);
     expect(next).toHaveBeenCalledTimes(1);
-  })
+  });
 
   test('It should coerce values if validation passed', async () => {
     const ctx = createContext({
-      url: '/pets?limit=10',
+      url: '/pets?limit=10&type[color]=red&fields=name,age,breed',
       headers: {
         'accept': 'application/json'
       },
@@ -66,24 +66,39 @@ describe('Koa Oas3', () => {
     const next = jest.fn();
     await mw(ctx, next);
     expect(ctx.oas!.request.query.limit).toBe(10);
+    expect(ctx.oas!.request.query.type).toEqual({color: 'red'});
+    expect(ctx.oas!.request.query.fields).toEqual(['name','age','breed']);
   });
 
-  test('It should throw ValidationError if validation failed', () => {
-    const ctx = createContext({
-      url: '/pets',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json'
-      },
-      method: 'POST',
-      body: {
-        id: 1,
-        tag: 'tag'
-      }
+  describe('Throw ValidationError', () => {
+    test('Is should throw ValidationError if validation failed for object type query params', () => {
+        const ctx = createContext({
+            url: '/pets?type[color]=grey',
+            headers: {
+              'accept': 'application/json'
+            },
+            method: 'GET'
+          });
+          const next = jest.fn();
+          return expect(mw(ctx, next)).rejects.toThrow();
     });
-    const next = jest.fn();
-    return expect(mw(ctx, next)).rejects.toThrow();
-  })
+    test('It should throw ValidationError if validation failed', () => {
+        const ctx = createContext({
+          url: '/pets',
+          headers: {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+          },
+          method: 'POST',
+          body: {
+            id: 1,
+            tag: 'tag'
+          }
+        });
+        const next = jest.fn();
+        return expect(mw(ctx, next)).rejects.toThrow();
+      });
+  });
 
   test('Should custom error handler work', async () => {
     const ctx = createContext({
@@ -109,7 +124,7 @@ describe('Koa Oas3', () => {
     });
     await expect(mw(ctx, next)).rejects.toThrow();
     expect(errorHandler).toBeCalled();
-  })
+  });
 
   test('It should pick the correct body handler for content type', async () => {
     const ctx = createContext({
