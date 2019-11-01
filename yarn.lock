@@ -1129,10 +1129,10 @@ better-ajv-errors@^0.5.2:
     jsonpointer "^4.0.1"
     leven "^2.1.0"
 
-better-ajv-errors@^0.6.5:
-  version "0.6.6"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/better-ajv-errors/-/better-ajv-errors-0.6.6.tgz#967f3075ca43455021c4802c92761dfbf843188e"
-  integrity sha1-ln8wdcpDRVAhxIAsknYd+/hDGI4=
+better-ajv-errors@^0.6.7:
+  version "0.6.7"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/better-ajv-errors/-/better-ajv-errors-0.6.7.tgz#b5344af1ce10f434fe02fc4390a5a9c811e470d1"
+  integrity sha1-tTRK8c4Q9DT+AvxDkKWpyBHkcNE=
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/runtime" "^7.0.0"
@@ -4004,13 +4004,13 @@ oas-validator@^3.3.1:
     should "^13.2.1"
     yaml "^1.3.1"
 
-oas3-chow-chow@^0.16.1:
-  version "0.16.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/oas3-chow-chow/-/oas3-chow-chow-0.16.1.tgz#aa56978f801c56e6168e896563c9010dd02881e1"
-  integrity sha1-qlaXj4AcVuYWjollY8kBDdAogeE=
+oas3-chow-chow@^0.17.0:
+  version "0.17.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/oas3-chow-chow/-/oas3-chow-chow-0.17.0.tgz#447b2b8ba000550e11b2e74e507a8e187dcf662d"
+  integrity sha1-RHsri6AAVQ4RsudOUHqOGH3PZi0=
   dependencies:
     ajv "^6.10.2"
-    better-ajv-errors "^0.6.5"
+    better-ajv-errors "^0.6.7"
     json-schema-deref-sync "^0.10.1"
     openapi3-ts "^1.3.0"
     xregexp "^4.2.4"
