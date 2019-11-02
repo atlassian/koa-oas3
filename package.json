@@ -8,7 +8,8 @@
   "scripts": {
     "test": "jest --coverage --no-watchman",
     "test:watch": "jest --coverage --watch",
-    "prepublishOnly": "rm -rf lib && tsc"
+    "prepublishOnly": "rm -rf lib && tsc",
+    "release": "yarn prepublishOnly && changeset publish"
   },
   "jest": {
     "testURL": "http://localhost/",
