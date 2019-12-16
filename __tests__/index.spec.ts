@@ -286,7 +286,7 @@ describe('Koa Oas3', () => {
   });
 })
 
-describe.only('Koa Oas3 with ChowOptions', () => {
+describe('Koa Oas3 with ChowOptions', () => {
   const mw = oas({
     file: path.resolve('./__tests__/fixtures/pet-store.json'),
     endpoint: '/openapi',
