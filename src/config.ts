@@ -1,4 +1,4 @@
-import { ChowError } from 'oas3-chow-chow';
+import { ChowError, ChowOptions } from 'oas3-chow-chow';
 import * as bodyParser from 'koa-bodyparser';
 import { Context, Middleware } from 'koa';
 
@@ -54,6 +54,10 @@ export interface Config {
   requestBodyHandler?: {
     [key: string]: Middleware
   };
+  /**
+   * Optional options for sending to oas3-chow-chow/AJV
+   */
+  validationOptions?: Partial<ChowOptions>;
 }
 
 function defaultErrorHandler(err: Error, ctx: Context) {
@@ -97,6 +101,7 @@ export function validateConfig(cfg: Partial<Config>): Config {
         },
         enableTypes: ['form']
       })
-    }
+    },
+    validationOptions: cfg.validationOptions
   };
 }
