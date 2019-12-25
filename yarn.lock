@@ -652,6 +652,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.7.tgz#960d9feb3ade2233bcc9843c918d740b4f78a7cf"
   integrity sha512-VkKcfuitP+Nc/TaTFH0B8qNmn+6NbI6crLkQonbedViVz7O2w8QV/GERPlkJ4bg42VGHiEWa31CoTOPs1q6z1w==
 
+"@types/qs@^6.5.3":
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.0.tgz#2a5fa918786d07d3725726f7f650527e1cfeaffd"
+  integrity sha512-c4zji5CjWv1tJxIZkz1oUtGcdOlsH3aza28Nqmm+uNDWBRHoMsjooBEN4czZp1V3iXPihE/VRUOBqg+4Xq0W4g==
+
 "@types/range-parser@*":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.2.tgz#fa8e1ad1d474688a757140c91de6dace6f4abc8d"
@@ -4397,6 +4402,11 @@ qs@^6.5.2:
   version "6.8.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/qs/-/qs-6.8.0.tgz#87b763f0d37ca54200334cd57bb2ef8f68a1d081"
   integrity sha1-h7dj8NN8pUIAM0zVe7Lvj2ih0IE=
+
+qs@^6.9.0:
+  version "6.9.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.1.tgz#20082c65cb78223635ab1a9eaca8875a29bf8ec9"
+  integrity sha512-Cxm7/SS/y/Z3MHWSxXb8lIFqgqBowP5JMlTUFyJN88y0SGQhVmZnqFK/PeuMX9LzUyWsqqhNxIyg0jlzq946yA==
 
 qs@~6.5.1:
   version "6.5.2"
