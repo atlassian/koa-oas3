@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 0.16.1
+
+### Patch Changes
+
+- 69976f9: Bump packages
+
 ## 0.16.0
 
 ### Minor Changes
