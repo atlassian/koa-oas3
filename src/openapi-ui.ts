@@ -81,7 +81,7 @@ window.onload = function() {
 
   // Build a system
   const ui = SwaggerUIBundle({
-    url: window.location.href.replace(/\\/+$/, '') + "${cfg.url}",
+    url: new URL("${cfg.url}", window.location.href).href,
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [
