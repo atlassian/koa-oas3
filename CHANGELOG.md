@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 0.17.1
+
+### Patch Changes
+
+- 0b31da1: Bump handlebars for security fix
+
 ## 0.17.0
 
 ### Minor Changes
