@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 0.17.0
+
+### Minor Changes
+
+- c39a5e4: When constructing ChowChow object, pass in ChowOptions so that library users can sepecify ChowChow/AVJ options
+
 ## 0.16.1
 
 ### Patch Changes
