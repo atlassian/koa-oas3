@@ -3,6 +3,7 @@ import * as bodyParser from 'koa-bodyparser';
 
 import { oas } from '../src';
 import { createContext } from './helpers/createContext';
+import { ChowOptions } from 'oas3-chow-chow';
 
 describe('Koa Oas3', () => {
   const mw = oas({
@@ -298,4 +299,45 @@ describe('Koa Oas3', () => {
     await expect(mw(ctx, next)).resolves.toEqual(undefined);
     expect(bodyHandler).not.toHaveBeenCalled();
   });
+})
+
+describe('Koa Oas3 with ChowOptions', () => {
+  const mw = oas({
+    file: path.resolve('./__tests__/fixtures/pet-store.json'),
+    endpoint: '/openapi',
+    uiEndpoint: '/openapi.html',
+    validatePaths: ['/pets'],
+    validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+  });
+
+  test('It should coerce values if validation passed', async () => {
+    const ctx = createContext({
+      url: '/pets?limit=10',
+      headers: {
+        'accept': 'application/json'
+      },
+      method: 'GET'
+    });
+    const next = jest.fn();
+    await mw(ctx, next);
+    expect(ctx.oas!.request.query.limit).toBe(10);
+  });
+
+  test('It should throw ValidationError if validation failed', () => {
+    const ctx = createContext({
+      url: '/pets',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: {
+        id: 1,
+        tag: 'tag'
+      }
+    });
+    const next = jest.fn();
+    return expect(mw(ctx, next)).rejects.toThrow();
+  })
+
 })

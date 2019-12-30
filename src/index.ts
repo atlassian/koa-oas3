@@ -141,7 +141,7 @@ function compileOas(config: Config) {
     throw new Error('Invalid Openapi document');
   }
   return {
-    compiled: new ChowChow(openApiObject),
+    compiled: new ChowChow(openApiObject, config.validationOptions),
     doc: openApiObject,
   };
 }
