@@ -6,8 +6,9 @@
   "author": "<tli@atlassian.com>",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "jest --coverage --no-watchman",
+    "test": "jest --coverage --no-watchman && yarn build",
     "test:watch": "jest --coverage --watch",
+    "build": "tsc",
     "prepublishOnly": "rm -rf lib && tsc",
     "release": "yarn prepublishOnly && changeset publish"
   },
