@@ -24,7 +24,7 @@ app.use(oas({
   file: `${__dirname}/../openapi.yaml`,
   endpoint: '/openapi.json',
   uiEndpoint: '/'
-});
+}));
 
 app.listen(8080);
 ```
