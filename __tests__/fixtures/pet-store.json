@@ -22,6 +22,41 @@
         ],
         "parameters": [
           {
+            "name": "fields",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "name",
+                  "breed",
+                  "age",
+                  "weight"
+                ]
+              }
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "color": {
+                  "type": "string",
+                  "enum": [
+                    "red",
+                    "green",
+                    "black",
+                    "white"
+                  ]
+                }
+              }
+            }
+          },
+          {
             "name": "limit",
             "in": "query",
             "description": "How many items to return at one time (max 100)",
@@ -41,7 +76,12 @@
               "maxItems": 3,
               "items": {
                 "type": "string",
-                "enum": ["bichon", "chowchow", "jack russel", "labrador"]
+                "enum": [
+                  "bichon",
+                  "chowchow",
+                  "jack russel",
+                  "labrador"
+                ]
               }
             }
           }
@@ -86,7 +126,7 @@
         "requestBody": {
           "description": "The pet information",
           "content": {
-            "application/json":{
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Pet"
               }
@@ -194,7 +234,7 @@
         "requestBody": {
           "description": "The pet information",
           "content": {
-            "application/json":{
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Pet"
               }

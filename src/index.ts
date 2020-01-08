@@ -7,6 +7,7 @@ import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as oasValidator from 'oas-validator';
 import * as compose from 'koa-compose';
+import * as qs from 'qs';
 
 export { ChowError, RequestValidationError, ResponseValidationError };
 
@@ -39,7 +40,7 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
       const validRequest = compiled.validateRequest(ctx.path, {
         method: ctx.request.method,
         header: ctx.request.header,
-        query: ctx.request.query,
+        query: qs.parse(ctx.request.querystring, { comma: true }),
         path: ctx.params,
         cookie: ctx.cookies,
         body: (ctx.request as RequestWithBody).body,
@@ -140,7 +141,7 @@ function compileOas(config: Config) {
     throw new Error('Invalid Openapi document');
   }
   return {
-    compiled: new ChowChow(openApiObject),
+    compiled: new ChowChow(openApiObject, config.validationOptions),
     doc: openApiObject,
   };
 }
