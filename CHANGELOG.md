@@ -1,5 +1,15 @@
 # koa-oas3
 
+## 0.18.0
+
+### Minor Changes
+
+- 7556223: Update oas3-chow-chow dependency to 0.18.0
+
+### Patch Changes
+
+- 66cfd18: Fix registry
+
 ## 0.17.1
 
 ### Patch Changes
