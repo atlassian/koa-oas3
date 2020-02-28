@@ -40,7 +40,7 @@ export function oas(cfg: Partial<Config>): koa.Middleware {
       const validRequest = compiled.validateRequest(ctx.path, {
         method: ctx.request.method,
         header: ctx.request.header,
-        query: qs.parse(ctx.request.querystring, { comma: true }),
+        query: qs.parse(ctx.request.querystring, config.qsParseOptions),
         path: ctx.params,
         cookie: ctx.cookies,
         body: (ctx.request as RequestWithBody).body,

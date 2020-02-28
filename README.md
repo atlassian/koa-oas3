@@ -41,6 +41,7 @@ app.listen(8080);
 * `validateResponse`:(default: false) - Validate response against Openapi schemas
 * `validatePaths`:(default ['/']) - Only endpoints starting with the values specified here will be validated
 * `swaggerUiBundleBasePath`: (default use swagger-ui-dist from [unpkg](https://unpkg.com/)) - [swaggerUiAssetPath](https://www.npmjs.com/package/swagger-ui-dist) needed for loading the swagger-ui
+* `qsParseOptions: { [key: string]: any}`: Optional - Options to be passed to the [query string](https://github.com/ljharb/qs) parse command. Default: `{ comma: true }`
 * `errorHandler: (error: Error, ctx: Context) => void,`: Optional - custom error hanlder.
 * `requestBodyHandler: { [key: string]: koa.Middleware }`: Optional - custom body handler. Defaults:
 ```
