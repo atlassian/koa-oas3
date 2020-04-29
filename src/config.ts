@@ -58,6 +58,7 @@ export interface Config {
    * Optional options for sending to oas3-chow-chow/AJV
    */
   validationOptions?: Partial<ChowOptions>;
+  qsParseOptions?: qs.IParseOptions;
 }
 
 function defaultErrorHandler(err: Error, ctx: Context) {
@@ -82,6 +83,7 @@ export function validateConfig(cfg: Partial<Config>): Config {
     validatePaths: cfg.validatePaths || ['/'],
     swaggerUiBundleBasePath: cfg.swaggerUiBundleBasePath || '//unpkg.com/swagger-ui-dist@3/',
     errorHandler: cfg.errorHandler || defaultErrorHandler,
+    qsParseOptions: cfg.qsParseOptions || { comma: true },
     requestBodyHandler: cfg.requestBodyHandler || {
       'application/json': bodyParser({
         extendTypes: {
