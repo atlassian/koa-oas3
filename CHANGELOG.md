@@ -1,5 +1,17 @@
 # koa-oas3
 
+## 0.19.0
+
+### Minor Changes
+
+- 978b610: Adds options for querystring parsing for validation.
+
+  This allows individuals to specify options for how incoming query strings should be parsed (such as for array structures). By default it maintains the existing option of parsing commas as a delimiter for entries in an array parameter. For more info on how to inject different options see README.md
+
+### Patch Changes
+
+- 287f903: Fix compiling error during build
+
 ## 0.18.0
 
 ### Minor Changes
