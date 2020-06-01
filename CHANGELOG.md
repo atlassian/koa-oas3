@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 1.0.0
+
+### Major Changes
+
+- 22538ed: Bump oas3 to the first major version
+
 ## 0.19.0
 
 ### Minor Changes
