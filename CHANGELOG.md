@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 1.0.1
+
+### Patch Changes
+
+- c21cece: Bump oas3-chow-chow to 1.1.1
+
 ## 1.0.0
 
 ### Major Changes
