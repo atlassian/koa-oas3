@@ -6,7 +6,7 @@ import * as koa from 'koa';
 import { oas } from '../src';
 import { createContext } from './helpers/createContext';
 
-describe.only('Koa Oas3', () => {
+describe('Koa Oas3', () => {
   let mw: koa.Middleware;
 
   beforeAll(async () => {
@@ -318,47 +318,47 @@ describe.only('Koa Oas3', () => {
   });
 })
 
-// describe.skip('Koa Oas3 with ChowOptions', () => {
-//   let mw: koa.Middleware;
+describe('Koa Oas3 with ChowOptions', () => {
+  let mw: koa.Middleware;
 
-//   beforeAll(async () => {
-//     mw = await oas({
-//       file: path.resolve('./__tests__/fixtures/pet-store.json'),
-//       endpoint: '/openapi',
-//       uiEndpoint: '/openapi.html',
-//       validatePaths: ['/pets'],
-//       validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
-//     });
-//   })
+  beforeAll(async () => {
+    mw = await oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    });
+  })
 
-//   test('It should coerce values if validation passed', async () => {
-//     const ctx = createContext({
-//       url: '/pets?limit=10',
-//       headers: {
-//         'accept': 'application/json'
-//       },
-//       method: 'GET'
-//     });
-//     const next = jest.fn();
-//     await mw(ctx, next);
-//     expect(ctx.oas!.request.query.limit).toBe(10);
-//   });
+  test('It should coerce values if validation passed', async () => {
+    const ctx = createContext({
+      url: '/pets?limit=10',
+      headers: {
+        'accept': 'application/json'
+      },
+      method: 'GET'
+    });
+    const next = jest.fn();
+    await mw(ctx, next);
+    expect(ctx.oas!.request.query.limit).toBe(10);
+  });
 
-//   test('It should throw ValidationError if validation failed', () => {
-//     const ctx = createContext({
-//       url: '/pets',
-//       headers: {
-//         'accept': 'application/json',
-//         'content-type': 'application/json'
-//       },
-//       method: 'POST',
-//       body: {
-//         id: 1,
-//         tag: 'tag'
-//       }
-//     });
-//     const next = jest.fn();
-//     return expect(mw(ctx, next)).rejects.toThrow();
-//   })
+  test('It should throw ValidationError if validation failed', () => {
+    const ctx = createContext({
+      url: '/pets',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: {
+        id: 1,
+        tag: 'tag'
+      }
+    });
+    const next = jest.fn();
+    return expect(mw(ctx, next)).rejects.toThrow();
+  })
 
-// })
+})
