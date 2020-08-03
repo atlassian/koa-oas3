@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.0.1
+
+### Patch Changes
+
+- e384d03: Patch qs type error
+
 ## 2.0.0
 
 ### Major Changes
