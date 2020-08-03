@@ -20,11 +20,12 @@ import { oas } from 'koa-oas3';
 
 const app = new Koa();
 app.use(bodyParser());
-app.use(oas({
+const oasMw = await oas({
   file: `${__dirname}/../openapi.yaml`,
   endpoint: '/openapi.json',
   uiEndpoint: '/'
-}));
+})
+app.use(oasMw);
 
 app.listen(8080);
 ```

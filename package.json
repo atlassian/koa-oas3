@@ -30,7 +30,7 @@
     "jsonfile": "^5.0.0",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
-    "oas-validator": "^3.3.1",
+    "oas-validator": "lucaslago/oas-kit#oas-validator-v4.0.7-gitpkg",
     "oas3-chow-chow": "^1.1.1",
     "qs": "^6.9.1"
   },
