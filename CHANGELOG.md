@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.0.0
+
+### Major Changes
+
+- 7d71651: oas() is now an async function
+
 ## 1.0.1
 
 ### Patch Changes
