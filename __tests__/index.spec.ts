@@ -19,6 +19,16 @@ describe.only('Koa Oas3', () => {
     });
   })
 
+  test('It should throw error if invalid Openapi document is passed', async () => {
+    return expect(oas({
+      file: path.resolve('./__tests__/fixtures/broken.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    })).rejects.toThrow('Invalid Openapi document');
+  })
+
   test('It should return raw Openapi doc with defined path', async () => {
     const ctx = createContext({
       url: '/openapi',
