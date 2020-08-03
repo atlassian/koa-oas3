@@ -1,6 +1,7 @@
 import { ChowError, ChowOptions } from 'oas3-chow-chow';
 import * as bodyParser from 'koa-bodyparser';
 import { Context, Middleware } from 'koa';
+import * as qs from 'qs';
 
 export interface Config {
   /**
