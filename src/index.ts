@@ -8,8 +8,11 @@ import * as fs from 'fs';
 import * as oasValidator from 'oas-validator';
 import * as compose from 'koa-compose';
 import * as qs from 'qs';
+import * as util from 'util';
 
 export { ChowError, RequestValidationError, ResponseValidationError };
+
+const readFile = util.promisify(fs.readFile);
 
 type RequestWithBody = koa.BaseRequest & {
   body?: any;
@@ -117,16 +120,16 @@ export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
   return composedMW;
 }
 
-function loadFromFile(file?: string) {
+async function loadFromFile(file?: string): Promise<any> {
     if (!file) {
         throw new Error("Missing file path");
     }
     switch (true) {
         case file.endsWith('.json'): {
-            return jsonfile.readFileSync(file);
+            return jsonfile.readFile(file);
         }
         case file.endsWith('.yml') || file.endsWith('.yaml'): {
-            return yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+            return yaml.safeLoad(await readFile(file, { encoding: 'utf8' }));
         }
         default:
             throw new Error('Unsupported file format');
@@ -134,7 +137,7 @@ function loadFromFile(file?: string) {
 }
 
 async function compileOas(config: Config) {
-  let openApiObject: any = config.spec || loadFromFile(config.file);
+  let openApiObject: any = config.spec || await loadFromFile(config.file);
   try {
     await oasValidator.validateInner(openApiObject, {});
   } catch (err) {
