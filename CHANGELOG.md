@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.0.2
+
+### Patch Changes
+
+- e5897fb: Include types qs
+
 ## 2.0.1
 
 ### Patch Changes
