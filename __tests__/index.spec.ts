@@ -1,17 +1,23 @@
 import * as path from 'path';
 import * as bodyParser from 'koa-bodyparser';
+import { ChowOptions } from 'oas3-chow-chow';
+import * as koa from 'koa';
 
 import { oas } from '../src';
 import { createContext } from './helpers/createContext';
-import { ChowOptions } from 'oas3-chow-chow';
 
-describe('Koa Oas3', () => {
-  const mw = oas({
-    file: path.resolve('./__tests__/fixtures/pet-store.json'),
-    endpoint: '/openapi',
-    uiEndpoint: '/openapi.html',
-    validatePaths: ['/pets']
-  });
+describe('Koa Oas3', async () => {
+  let mw: koa.Middleware;
+
+  beforeAll(async () => {
+    mw = await oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    });
+  })
 
   test('It should return raw Openapi doc with defined path', async () => {
     const ctx = createContext({
@@ -116,7 +122,7 @@ describe('Koa Oas3', () => {
     });
     const next = jest.fn();
     const errorHandler = jest.fn((err) => { throw err });
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -148,7 +154,7 @@ describe('Koa Oas3', () => {
       },
       enableTypes: ['json']
     }));
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -183,7 +189,7 @@ describe('Koa Oas3', () => {
       enableTypes: ['json']
     }));
     const anotherBodyHandler = jest.fn();
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -219,7 +225,7 @@ describe('Koa Oas3', () => {
       },
       enableTypes: ['json']
     }));
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -253,7 +259,7 @@ describe('Koa Oas3', () => {
       },
       enableTypes: ['json']
     }));
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -287,7 +293,7 @@ describe('Koa Oas3', () => {
       },
       enableTypes: ['json']
     }));
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -302,13 +308,17 @@ describe('Koa Oas3', () => {
 })
 
 describe('Koa Oas3 with ChowOptions', () => {
-  const mw = oas({
-    file: path.resolve('./__tests__/fixtures/pet-store.json'),
-    endpoint: '/openapi',
-    uiEndpoint: '/openapi.html',
-    validatePaths: ['/pets'],
-    validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
-  });
+  let mw: koa.Middleware;
+
+  beforeAll(async () => {
+    mw = await oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    });
+  })
 
   test('It should coerce values if validation passed', async () => {
     const ctx = createContext({

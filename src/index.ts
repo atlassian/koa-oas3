@@ -30,10 +30,10 @@ declare module 'koa' {
 }
 
 
-export function oas(cfg: Partial<Config>): koa.Middleware {
+export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
 
   const config = validateConfig(cfg);
-  const { compiled, doc } = compileOas(config);
+  const { compiled, doc } = await compileOas(config);
 
   const validatorMW: koa.Middleware = async (ctx: koa.Context & { params?: any }, next: () => Promise<any>): Promise<void> => {
     try {
@@ -133,11 +133,14 @@ function loadFromFile(file?: string) {
     }
 }
 
-function compileOas(config: Config) {
+async function compileOas(config: Config) {
   let openApiObject: any = config.spec || loadFromFile(config.file);
-  if (!oasValidator.validateSync(openApiObject, {})) {
+  try {
+    await oasValidator.validateInner(openApiObject, {});
+  } catch (err) {
     throw new Error('Invalid Openapi document');
   }
+
   return {
     compiled: new ChowChow(openApiObject, config.validationOptions),
     doc: openApiObject,
