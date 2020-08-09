@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "js-yaml": "^3.13.1",
-    "jsonfile": "^5.0.0",
+    "jsonfile": "^6.0.0",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
     "oas-validator": "lucaslago/oas-kit#oas-validator-v4.0.7-gitpkg",
@@ -39,7 +39,7 @@
     "@changesets/cli": "^2.4.1",
     "@types/jest": "^24.0.24",
     "@types/js-yaml": "^3.12.1",
-    "@types/jsonfile": "^5.0.0",
+    "@types/jsonfile": "6.0.0",
     "@types/koa": "^2.11.0",
     "@types/koa-bodyparser": "^4.3.0",
     "jest": "^24.9.0",
