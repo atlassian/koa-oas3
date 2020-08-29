@@ -1,14 +1,15 @@
 import * as koa from 'koa';
-import { Config, validateConfig } from './config';
 import ChowChow, { ChowError, RequestValidationError, ResponseValidationError } from 'oas3-chow-chow';
-import { openapiUI } from './openapi-ui';
 import * as jsonfile from 'jsonfile';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
-import * as oasValidator from 'oas-validator';
 import * as compose from 'koa-compose';
 import * as qs from 'qs';
 import * as util from 'util';
+
+import { Config, validateConfig } from './config';
+import { openapiUI } from './openapi-ui';
+import { validate } from './openapi-validator';
 
 export { ChowError, RequestValidationError, ResponseValidationError };
 
@@ -138,9 +139,7 @@ async function loadFromFile(file?: string): Promise<any> {
 
 async function compileOas(config: Config) {
   let openApiObject: any = config.spec || await loadFromFile(config.file);
-  try {
-    await oasValidator.validateInner(openApiObject, {});
-  } catch (err) {
+  if (!validate(openApiObject)) {
     throw new Error('Invalid Openapi document');
   }
 
