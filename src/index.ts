@@ -24,6 +24,7 @@ export type Oas = {
     header?: any;
     params?: any;
   };
+  operationId?: any;
 }
 
 declare module 'koa' {
@@ -53,8 +54,9 @@ export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
         request: {
           query: validRequest.query,
           params: validRequest.path && validRequest.path.params,
-          header: validRequest.header
-        }
+          header: validRequest.header,
+        },
+        operationId: validRequest.operationId
       };
 
     } catch (err) {

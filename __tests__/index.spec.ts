@@ -87,6 +87,52 @@ describe('Koa Oas3', () => {
     expect(ctx.oas!.request.query.fields).toEqual(['name','age','breed']);
   });
 
+  test('It should parse out operationId for GET', async() => {
+    const ctx = createContext({
+      url: '/pets?limit=10&type[color]=red&fields=name,age,breed',
+      headers: {
+        'accept': 'application/json'
+      },
+      method: 'GET'
+    });
+    const next = jest.fn();
+    await mw(ctx, next);
+    expect(ctx.oas!.operationId).toEqual('listPets');
+  });
+
+  test('It should parse out operationId for POST', async() => {
+    const ctx = createContext({
+      url: '/pets',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: {
+        id: 1,
+        tag: 'tag',
+        name: 'name'
+      }
+    });
+    const next = jest.fn();
+    await mw(ctx, next);
+    expect(ctx.oas!.operationId).toEqual('createPets');
+  });
+
+  test('It should parse out operationId for PUT', async() => {
+    const ctx = createContext({
+      url: '/pets',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'audio/aac'
+      },
+      method: 'PUT'
+    });
+    const next = jest.fn();
+    await mw(ctx, next);
+    expect(ctx.oas!.operationId).toEqual('createEmptyPets');
+  });
+
   describe('Throw ValidationError', () => {
     test('Is should throw ValidationError if validation failed for object type query params', () => {
         const ctx = createContext({
