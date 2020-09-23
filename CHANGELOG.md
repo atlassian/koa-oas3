@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.1.0
+
+### Minor Changes
+
+- 74ab9f1: Set operationId when parsing request
+
 ## 2.0.2
 
 ### Patch Changes
