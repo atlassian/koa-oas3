@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.1.1
+
+### Patch Changes
+
+- ff054a8: Bump oas-validator
+
 ## 2.1.0
 
 ### Minor Changes
