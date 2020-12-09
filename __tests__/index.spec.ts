@@ -1,17 +1,33 @@
 import * as path from 'path';
 import * as bodyParser from 'koa-bodyparser';
+import { ChowOptions } from 'oas3-chow-chow';
+import * as koa from 'koa';
 
 import { oas } from '../src';
 import { createContext } from './helpers/createContext';
-import { ChowOptions } from 'oas3-chow-chow';
 
 describe('Koa Oas3', () => {
-  const mw = oas({
-    file: path.resolve('./__tests__/fixtures/pet-store.json'),
-    endpoint: '/openapi',
-    uiEndpoint: '/openapi.html',
-    validatePaths: ['/pets']
-  });
+  let mw: koa.Middleware;
+
+  beforeAll(async () => {
+    mw = await oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    });
+  })
+
+  test('It should throw error if invalid Openapi document is passed', async () => {
+    return expect(oas({
+      file: path.resolve('./__tests__/fixtures/broken.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    })).rejects.toThrow('Invalid Openapi document');
+  })
 
   test('It should return raw Openapi doc with defined path', async () => {
     const ctx = createContext({
@@ -71,6 +87,52 @@ describe('Koa Oas3', () => {
     expect(ctx.oas!.request.query.fields).toEqual(['name','age','breed']);
   });
 
+  test('It should parse out operationId for GET', async() => {
+    const ctx = createContext({
+      url: '/pets?limit=10&type[color]=red&fields=name,age,breed',
+      headers: {
+        'accept': 'application/json'
+      },
+      method: 'GET'
+    });
+    const next = jest.fn();
+    await mw(ctx, next);
+    expect(ctx.oas!.operationId).toEqual('listPets');
+  });
+
+  test('It should parse out operationId for POST', async() => {
+    const ctx = createContext({
+      url: '/pets',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: {
+        id: 1,
+        tag: 'tag',
+        name: 'name'
+      }
+    });
+    const next = jest.fn();
+    await mw(ctx, next);
+    expect(ctx.oas!.operationId).toEqual('createPets');
+  });
+
+  test('It should parse out operationId for PUT', async() => {
+    const ctx = createContext({
+      url: '/pets',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'audio/aac'
+      },
+      method: 'PUT'
+    });
+    const next = jest.fn();
+    await mw(ctx, next);
+    expect(ctx.oas!.operationId).toEqual('createEmptyPets');
+  });
+
   describe('Throw ValidationError', () => {
     test('Is should throw ValidationError if validation failed for object type query params', () => {
         const ctx = createContext({
@@ -102,6 +164,15 @@ describe('Koa Oas3', () => {
   });
 
   test('Should custom error handler work', async () => {
+    const next = jest.fn();
+    const errorHandler = jest.fn((err) => { throw err });
+    const mw = await oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      errorHandler,
+    });
     const ctx = createContext({
       url: '/pets',
       headers: {
@@ -114,33 +185,12 @@ describe('Koa Oas3', () => {
         tag: 'tag'
       }
     });
-    const next = jest.fn();
-    const errorHandler = jest.fn((err) => { throw err });
-    const mw = oas({
-      file: path.resolve('./__tests__/fixtures/pet-store.json'),
-      endpoint: '/openapi',
-      uiEndpoint: '/openapi.html',
-      validatePaths: ['/pets'],
-      errorHandler,
-    });
+
     await expect(mw(ctx, next)).rejects.toThrow();
     expect(errorHandler).toBeCalled();
   });
 
   test('It should pick the correct body handler for content type', async () => {
-    const ctx = createContext({
-      url: '/pets',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json'
-      },
-      method: 'POST',
-      body: {
-        id: 1,
-        tag: 'tag',
-        name: 'name'
-      }
-    });
     const next = jest.fn();
     const bodyHandler = jest.fn().mockImplementation(bodyParser({
       extendTypes: {
@@ -148,7 +198,7 @@ describe('Koa Oas3', () => {
       },
       enableTypes: ['json']
     }));
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -157,11 +207,6 @@ describe('Koa Oas3', () => {
         'application/json': bodyHandler
       }
     });
-    await expect(mw(ctx, next)).resolves.toEqual(undefined);
-    expect(bodyHandler).toBeCalled();
-  });
-
-  test('It should pick the most specific body handler for content type', async () => {
     const ctx = createContext({
       url: '/pets',
       headers: {
@@ -175,6 +220,11 @@ describe('Koa Oas3', () => {
         name: 'name'
       }
     });
+    await expect(mw(ctx, next)).resolves.toEqual(undefined);
+    expect(bodyHandler).toBeCalled();
+  });
+
+  test('It should pick the most specific body handler for content type', async () => {
     const next = jest.fn();
     const bodyHandler = jest.fn().mockImplementation(bodyParser({
       extendTypes: {
@@ -183,7 +233,7 @@ describe('Koa Oas3', () => {
       enableTypes: ['json']
     }));
     const anotherBodyHandler = jest.fn();
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -191,6 +241,19 @@ describe('Koa Oas3', () => {
       requestBodyHandler: {
         'application/json': bodyHandler,
         'application/*': anotherBodyHandler
+      }
+    });
+    const ctx = createContext({
+      url: '/pets',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: {
+        id: 1,
+        tag: 'tag',
+        name: 'name'
       }
     });
     await expect(mw(ctx, next)).resolves.toEqual(undefined);
@@ -219,7 +282,7 @@ describe('Koa Oas3', () => {
       },
       enableTypes: ['json']
     }));
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -253,7 +316,7 @@ describe('Koa Oas3', () => {
       },
       enableTypes: ['json']
     }));
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -287,7 +350,7 @@ describe('Koa Oas3', () => {
       },
       enableTypes: ['json']
     }));
-    const mw = oas({
+    const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
@@ -302,13 +365,17 @@ describe('Koa Oas3', () => {
 })
 
 describe('Koa Oas3 with ChowOptions', () => {
-  const mw = oas({
-    file: path.resolve('./__tests__/fixtures/pet-store.json'),
-    endpoint: '/openapi',
-    uiEndpoint: '/openapi.html',
-    validatePaths: ['/pets'],
-    validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
-  });
+  let mw: koa.Middleware;
+
+  beforeAll(async () => {
+    mw = await oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: ['/pets'],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    });
+  })
 
   test('It should coerce values if validation passed', async () => {
     const ctx = createContext({

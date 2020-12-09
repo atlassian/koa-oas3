@@ -1,6 +1,6 @@
 {
   "name": "koa-oas3",
-  "version": "0.17.1",
+  "version": "2.1.1",
   "main": "lib/index.js",
   "types": "lib/index.d.js",
   "author": "<tli@atlassian.com>",
@@ -30,8 +30,9 @@
     "jsonfile": "^5.0.0",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
-    "oas-validator": "^3.3.1",
-    "oas3-chow-chow": "^0.17.0",
+    "oas-validator": "^5.0.3",
+    "oas3-chow-chow": "^1.1.1",
+    "@types/qs": "^6.9.0",
     "qs": "^6.9.1"
   },
   "devDependencies": {
@@ -41,7 +42,6 @@
     "@types/jsonfile": "^5.0.0",
     "@types/koa": "^2.11.0",
     "@types/koa-bodyparser": "^4.3.0",
-    "@types/qs": "^6.9.0",
     "jest": "^24.9.0",
     "koa": "^2.11.0",
     "node-mocks-http": "^1.8.1",
