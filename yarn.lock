@@ -611,10 +611,10 @@
   resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-3.12.1.tgz#5c6f4a1eabca84792fbd916f0cb40847f123c656"
   integrity sha512-SGGAhXLHDx+PK4YLNcNGa6goPf9XRWQNAUUbffkwVGGXIxmDKWyGGL4inzq2sPmExu431Ekb9aEMn9BkPqEYFA==
 
-"@types/jsonfile@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/jsonfile/-/jsonfile-5.0.0.tgz#d55441a0a2ef59b10adb424850793eb322e4923d"
-  integrity sha512-FN+OQoJgujcehla+PJjStradflo+MrIJhJQoXu1Akk9WuCB8QZnTth/d191rrpGcenQ2P3f6YcNHiR1aS9jNvw==
+"@types/jsonfile@5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@types/jsonfile/-/jsonfile-5.0.1.tgz#bffb94666461253e8d7e882775ee02e99870b25b"
+  integrity sha512-NHZ+FcLQbs7DpQvWTMTa5pvkSzeWGswCA3reWfADKkqKBI4nf6Pcml7Y8IeRh6ebxXeU+C6AgTa1H3Mpy8TAVg==
   dependencies:
     "@types/node" "*"
 
