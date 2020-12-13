@@ -31,7 +31,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
     "oas-validator": "^5.0.3",
-    "oas3-chow-chow": "^1.1.1",
+    "oas3-chow-chow": "^1.1.3",
     "@types/qs": "^6.9.0",
     "qs": "^6.9.1"
   },

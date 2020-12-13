@@ -3520,10 +3520,10 @@ oas-validator@^5.0.3:
     should "^13.2.1"
     yaml "^1.10.0"
 
-oas3-chow-chow@^1.1.1:
-  version "1.1.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/oas3-chow-chow/-/oas3-chow-chow-1.1.1.tgz#d6f8c032d935f6d25118ae06e113e3d243018535"
-  integrity sha1-1vjAMtk19tJRGK4G4RPj0kMBhTU=
+oas3-chow-chow@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-1.1.3.tgz#d41179e053f9139755ff67c95ed8bcbbb5e4abb8"
+  integrity sha512-LQZLJGAQUctiMf4j//x59zEGO0I1UzWnVJebq6de2EJH+0UAMPRa8x8zCweWOua8XWhjT27vFEzVRIX4rcxxyQ==
   dependencies:
     ajv "^6.12.3"
     better-ajv-errors "^0.6.7"
