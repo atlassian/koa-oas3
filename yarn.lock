@@ -3520,10 +3520,10 @@ oas-validator@^5.0.3:
     should "^13.2.1"
     yaml "^1.10.0"
 
-oas3-chow-chow@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-1.1.4.tgz#ed8e669d81cca59a46ab5edc77be03efaa41412c"
-  integrity sha512-sS2dZl5lzwO+rOzHBBBeHqRovltu2zYazLHAHafa0fqKCGtyJ7xWbManSXBA/a8P8PRWrcPhKJzLsEUbXx8Dzg==
+oas3-chow-chow@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/oas3-chow-chow/-/oas3-chow-chow-1.2.0.tgz#1e7ee31814c926cca26f77a8e66b61acfc63b155"
+  integrity sha512-utUc8aeGr7v7K7bf+4Q4T8+C0qoCbrA17+JUg2FOQ9nfeK1UjJknS8iam3IZg/ZIl05KUUBbl7C3c+dzaCx0hQ==
   dependencies:
     ajv "^6.12.3"
     better-ajv-errors "^0.6.7"
