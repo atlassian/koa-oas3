@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.3.0
+
+### Minor Changes
+
+- c21df6b: Update oas3-chow-chow to 1.2.0
+
 ## 2.2.0
 
 ### Minor Changes
