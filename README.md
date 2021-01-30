@@ -76,6 +76,8 @@ Pull requests, issues and comments welcome. For pull requests:
 * Follow the existing style
 * Separate unrelated changes into multiple pull requests
 * See the existing issues for things to start contributing.
+* Generate changeset using `yarn changeset`
+* If there are dependency changes, update lock file with `yarn install`
 
 For bigger changes, make sure you start a discussion first by creating an issue and explaining the intended change.
 
