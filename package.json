@@ -1,6 +1,6 @@
 {
   "name": "koa-oas3",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "main": "lib/index.js",
   "types": "lib/index.d.js",
   "author": "<tli@atlassian.com>",
@@ -31,7 +31,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
     "oas-validator": "^5.0.3",
-    "oas3-chow-chow": "^1.1.3",
+    "oas3-chow-chow": "^1.2.0",
     "@types/qs": "^6.9.0",
     "qs": "^6.9.1"
   },
