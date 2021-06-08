@@ -44,7 +44,7 @@
     "@types/koa-bodyparser": "4.3.1",
     "jest": "24.9.0",
     "koa": "2.11.0",
-    "node-mocks-http": "1.8.1",
+    "node-mocks-http": "1.10.1",
     "ts-jest": "24.3.0",
     "typescript": "3.9.9"
   },
