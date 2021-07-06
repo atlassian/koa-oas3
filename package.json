@@ -39,7 +39,7 @@
     "@changesets/cli": "2.16.0",
     "@types/jest": "24.9.1",
     "@types/js-yaml": "3.12.6",
-    "@types/jsonfile": "5.0.0",
+    "@types/jsonfile": "5.0.2",
     "@types/koa": "2.11.0",
     "@types/koa-bodyparser": "4.3.1",
     "jest": "24.9.0",
