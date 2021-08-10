@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.3.1
+
+### Patch Changes
+
+- 66d53f9: Release security patches
+
 ## 2.3.0
 
 ### Minor Changes
