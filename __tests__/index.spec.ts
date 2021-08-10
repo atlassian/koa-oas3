@@ -372,7 +372,7 @@ describe('Koa Oas3 with ChowOptions', () => {
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
-      validatePaths: ['/pets'],
+      validatePaths: ['/'],
       validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
     });
   })
@@ -406,5 +406,21 @@ describe('Koa Oas3 with ChowOptions', () => {
     const next = jest.fn();
     return expect(mw(ctx, next)).rejects.toThrow();
   })
+
+  test('ctx.oas.request.params populated with path param if validation passed', async () => {
+    const pathParam = 345;
+
+    const ctx = createContext({
+      url: `/pets/${pathParam}`,
+      headers: {
+        'accept': 'application/json'
+      },
+      method: 'GET'
+    });
+    const next = jest.fn();
+    await mw(ctx, next);
+    console.log(`ctx.oas: ${JSON.stringify(ctx.oas)}`)
+    expect(ctx.oas!.request.params.petId).toBe(pathParam);
+  });
 
 })
