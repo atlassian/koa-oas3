@@ -53,7 +53,7 @@ export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
       ctx.oas = {
         request: {
           query: validRequest.query,
-          params: validRequest.path && validRequest.path.params,
+          params: validRequest.path,
           header: validRequest.header,
         },
         operationId: validRequest.operationId
