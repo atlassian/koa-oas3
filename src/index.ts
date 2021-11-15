@@ -143,7 +143,7 @@ async function compileOas(config: Config) {
   try {
     await oasValidator.validateInner(openApiObject, config.oasValidatorOptions || {});
   } catch (err) {
-    throw new Error('Invalid Openapi document');
+    throw new Error('Invalid Openapi document' + err.message);
   }
 
   return {
