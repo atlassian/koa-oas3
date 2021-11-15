@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.4.0
+
+### Minor Changes
+
+- dd5d075: add oasValidatorOptions for oas-validator
+
 ## 2.3.3
 
 ### Patch Changes
