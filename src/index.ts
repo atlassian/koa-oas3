@@ -141,7 +141,7 @@ async function loadFromFile(file?: string): Promise<any> {
 async function compileOas(config: Config) {
   let openApiObject: any = config.spec || await loadFromFile(config.file);
   try {
-    await oasValidator.validateInner(openApiObject, {});
+    await oasValidator.validateInner(openApiObject, config.oasValidatorOptions || {});
   } catch (err) {
     throw new Error('Invalid Openapi document');
   }
