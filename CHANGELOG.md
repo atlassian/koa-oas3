@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.3.3
+
+### Patch Changes
+
+- df65a22: bump oas3 chow chow
+
 ## 2.3.2
 
 ### Patch Changes
