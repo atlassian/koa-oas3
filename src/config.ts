@@ -59,6 +59,11 @@ export interface Config {
    * Optional options for sending to oas3-chow-chow/AJV
    */
   validationOptions?: Partial<ChowOptions>;
+  /**
+   * Optional options for sending to oas-validator.
+   * https://github.com/Mermade/oas-kit/blob/main/docs/options.md
+   */
+  oasValidatorOptions?: object;
   qsParseOptions?: qs.IParseOptions;
 }
 
@@ -105,6 +110,7 @@ export function validateConfig(cfg: Partial<Config>): Config {
         enableTypes: ['form']
       })
     },
-    validationOptions: cfg.validationOptions
+    validationOptions: cfg.validationOptions,
+    oasValidatorOptions: cfg.oasValidatorOptions
   };
 }
