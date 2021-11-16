@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 2.4.1
+
+### Patch Changes
+
+- fc66894: fix documentation
+
 ## 2.4.0
 
 ### Minor Changes
