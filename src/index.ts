@@ -93,7 +93,7 @@ export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
       return;
     }
 
-    if (!config.validatePaths.some(path => ctx.path.startsWith(path))) {
+    if (skipValidation(config.validatePaths, ctx)) {
       // Skip validation if no path matches
       return next();
     }
@@ -150,4 +150,19 @@ async function compileOas(config: Config) {
     compiled: new ChowChow(openApiObject, config.validationOptions),
     doc: openApiObject,
   };
+}
+
+function skipValidation(validatePaths: Array<string> | Array<RegExp>, ctx: koa.Context) {
+  let dontValidate = !validatePaths.some((path: string | RegExp) => {
+    if (isRegexPattern(path)) {
+      return (path as RegExp).test(ctx.path);
+    } else {
+      return ctx.path.startsWith(path as string);
+    }
+  });
+  return dontValidate;
+}
+
+function isRegexPattern(path: string | RegExp) {
+  return typeof path == 'object' ? true : false;
 }

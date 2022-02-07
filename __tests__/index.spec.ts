@@ -424,3 +424,67 @@ describe('Koa Oas3 with ChowOptions', () => {
   });
 
 })
+
+describe('Pass Regex Array as a validatePaths option', () => {
+  let mw: koa.Middleware;
+  const pathParam = 345;
+
+  beforeEach(async () => {
+    mw = await oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: [new RegExp(`pets(?!/${pathParam})`)],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    });
+  })
+
+  test('should NOT validate paths specified that do not validate agaiinst the RegEx pattern', async () => {
+    const ctx = createContext({
+      url: `/pets/${pathParam}`,
+      headers: {
+        'accept': 'application/json'
+      },
+      method: 'GET'
+    });
+
+    mw = await oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: [new RegExp(`pets(?!/${pathParam})`)],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    });
+
+    const next = jest.fn();
+    await mw(ctx, next);
+
+    expect(next).toHaveBeenCalledTimes(1);
+    expect(next).toHaveBeenCalledWith();
+  })
+
+  test('should validate paths specified in RegEx pattern', async () => {
+    const ctx = createContext({
+      url: `/pets/`,
+      headers: {
+        'accept': 'application/json'
+      },
+      method: 'GET'
+    });
+
+    mw = await oas({
+      file: path.resolve('./__tests__/fixtures/pet-store.json'),
+      endpoint: '/openapi',
+      uiEndpoint: '/openapi.html',
+      validatePaths: [new RegExp(`pets(?!/${pathParam})`)],
+      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+    });
+
+    const next = jest.fn();
+    await mw(ctx, next);
+
+    expect(next).toHaveBeenCalledTimes(1);
+    expect(next).not.toHaveBeenCalledWith();
+  })
+
+})
