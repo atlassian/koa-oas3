@@ -439,7 +439,7 @@ describe('Pass Regex Array as a validatePaths option', () => {
     });
   })
 
-  test('should NOT validate paths specified that do not validate agaiinst the RegEx pattern', async () => {
+  test('should NOT validate paths specified that do not validate against the RegExp pattern', async () => {
     const ctx = createContext({
       url: `/pets/${pathParam}`,
       headers: {
@@ -463,7 +463,7 @@ describe('Pass Regex Array as a validatePaths option', () => {
     expect(next).toHaveBeenCalledWith();
   })
 
-  test('should validate paths specified in RegEx pattern', async () => {
+  test('should validate paths specified in RegExp pattern', async () => {
     const ctx = createContext({
       url: `/pets/`,
       headers: {
