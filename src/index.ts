@@ -154,15 +154,11 @@ async function compileOas(config: Config) {
 
 function skipValidation(validatePaths: Array<string> | Array<RegExp>, ctx: koa.Context) {
   let dontValidate = !validatePaths.some((path: string | RegExp) => {
-    if (isRegexPattern(path)) {
-      return (path as RegExp).test(ctx.path);
+    if (path instanceof RegExp) {
+      return path.test(ctx.path);
     } else {
       return ctx.path.startsWith(path as string);
     }
   });
   return dontValidate;
-}
-
-function isRegexPattern(path: string | RegExp) {
-  return typeof path == 'object' ? true : false;
 }

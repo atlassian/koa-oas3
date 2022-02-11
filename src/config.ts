@@ -109,7 +109,7 @@ export function validateConfig(cfg: Partial<Config>): Config {
         },
         enableTypes: ['form']
       })
-    } as any,
+    },
     validationOptions: cfg.validationOptions,
     oasValidatorOptions: cfg.oasValidatorOptions
   };
