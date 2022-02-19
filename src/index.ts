@@ -152,7 +152,7 @@ async function compileOas(config: Config) {
   };
 }
 
-function skipValidation(validatePaths: Array<string> | Array<RegExp>, ctx: koa.Context) {
+function skipValidation(validatePaths: Array<string | RegExp>, ctx: koa.Context) {
   let dontValidate = !validatePaths.some((path: string | RegExp) => {
     if (path instanceof RegExp) {
       return path.test(ctx.path);
