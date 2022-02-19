@@ -1,5 +1,15 @@
 # koa-oas3
 
+## 2.5.0
+
+### Minor Changes
+
+- a2bf304: update validatePaths type to accept string array or regex array
+
+### Patch Changes
+
+- a6228d4: change validatePath type to allow both string and RegExp
+
 ## 2.4.1
 
 ### Patch Changes
