@@ -42,7 +42,7 @@
     "@types/jsonfile": "5.0.2",
     "@types/koa": "2.11.0",
     "@types/koa-bodyparser": "4.3.3",
-    "@types/qs": "^6.9.7",
+    "@types/qs": "6.9.7",
     "jest": "24.9.0",
     "koa": "2.11.0",
     "node-mocks-http": "1.10.1",
