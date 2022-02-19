@@ -34,7 +34,7 @@ export interface Config {
    * Whitelist paths for request validation
    * default: ['/']
    */
-  validatePaths: string[];
+  validatePaths: Array<string> | Array<RegExp>;
   /**
    * Optional base path to swagger ui bundle
    */
