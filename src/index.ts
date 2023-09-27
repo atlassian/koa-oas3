@@ -147,7 +147,7 @@ async function compileOas(config: Config) {
   }
 
   return {
-    compiled: new ChowChow(openApiObject, config.validationOptions),
+    compiled: await ChowChow.create(openApiObject, config.validationOptions),
     doc: openApiObject,
   };
 }
