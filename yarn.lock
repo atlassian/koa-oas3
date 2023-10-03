@@ -393,9 +393,9 @@
     minimist "^1.2.0"
 
 "@exodus/schemasafe@^1.0.0-rc.2":
-  version "1.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/@exodus/schemasafe/-/schemasafe-1.0.0-rc.3.tgz#dda2fbf3dafa5ad8c63dadff7e01d3fdf4736025"
-  integrity sha512-GoXw0U2Qaa33m3eUcxuHnHpNvHjNlLo0gtV091XBpaRINaB4X6FGCG5XKxSFNFiPpugUDqNruHzaqpTdDm4AOg==
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@exodus/schemasafe/-/schemasafe-1.3.0.tgz#731656abe21e8e769a7f70a4d833e6312fe59b7f"
+  integrity sha512-5Aap/GaRupgNx/feGBwLLTVv8OQFfv3pq2lPRzPg9R+IOBnDgghTGW7l7EuVXOvg5cc/xSAlRW8rBrjIC3Nvqw==
 
 "@humanwhocodes/momoa@^2.0.2":
   version "2.0.2"
@@ -656,11 +656,6 @@
   dependencies:
     "@types/connect" "*"
     "@types/node" "*"
-
-"@types/color-name@^1.1.1":
-  version "1.1.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
-  integrity sha1-HBJhu+qhCoBVu8XYq4S3sq/IRqA=
 
 "@types/connect@*":
   version "3.4.33"
@@ -963,14 +958,9 @@ ansi-regex@^4.0.0, ansi-regex@^4.1.0:
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-4.1.0.tgz#8b9f8f08cf1acb843756a839ca8c7e3168c51997"
   integrity sha512-1apePfXM1UOSqw0o9IiFAovVz9M5S1Dg+4TrDwfMewQ6p/rmMueb7tWZjQ1rx4Loy1ArBggoqGpfqqdI4rondg==
 
-ansi-regex@^5.0.0:
-  version "5.0.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
-  integrity sha1-OIU59VF5vzkznIGvMKZU1p+Hy3U=
-
-ansi-regex@^5.0.1:
+ansi-regex@^5.0.0, ansi-regex@^5.0.1:
   version "5.0.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
   integrity sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==
 
 ansi-styles@^3.2.0, ansi-styles@^3.2.1:
@@ -980,15 +970,7 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ansi-styles@^4.0.0:
-  version "4.2.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/ansi-styles/-/ansi-styles-4.2.1.tgz#90ae75c424d008d2624c5bf29ead3177ebfcf359"
-  integrity sha1-kK51xCTQCNJiTFvynq0xd+v881k=
-  dependencies:
-    "@types/color-name" "^1.1.1"
-    color-convert "^2.0.1"
-
-ansi-styles@^4.1.0:
+ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-4.3.0.tgz#edd803628ae71c04c85ae7a0906edad34b648937"
   integrity sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==
@@ -1337,9 +1319,9 @@ call-bind@^1.0.0, call-bind@^1.0.2:
     get-intrinsic "^1.0.2"
 
 call-me-maybe@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/call-me-maybe/-/call-me-maybe-1.0.1.tgz#26d208ea89e37b5cbde60250a15f031c16a4d66b"
-  integrity sha1-JtII6onje1y95gJQoV8DHBak1ms=
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/call-me-maybe/-/call-me-maybe-1.0.2.tgz#03f964f19522ba643b1b0693acb9152fe2074baa"
+  integrity sha512-HpX65o1Hnr9HH25ojC1YGs7HCQLq0GCOibSaWER0eNpgJ/Z1MZv2mTc7+xh6WOPxbRVcmgbv4hGU+uSQ/2xFZQ==
 
 callsites@^3.0.0:
   version "3.1.0"
@@ -1439,7 +1421,7 @@ cliui@^6.0.0:
 
 cliui@^8.0.1:
   version "8.0.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/cliui/-/cliui-8.0.1.tgz#0c04b075db02cbfe60dc8e6cf2f5486b1a3608aa"
+  resolved "https://registry.yarnpkg.com/cliui/-/cliui-8.0.1.tgz#0c04b075db02cbfe60dc8e6cf2f5486b1a3608aa"
   integrity sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==
   dependencies:
     string-width "^4.2.0"
@@ -1483,8 +1465,8 @@ color-convert@^1.9.0:
 
 color-convert@^2.0.1:
   version "2.0.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
-  integrity sha1-ctOmjVmMm9s68q0ehPIdiWq9TeM=
+  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
+  integrity sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==
   dependencies:
     color-name "~1.1.4"
 
@@ -1495,8 +1477,8 @@ color-name@1.1.3:
 
 color-name@~1.1.4:
   version "1.1.4"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
-  integrity sha1-wqCah6y95pVD3m9j+jmVyCbFNqI=
+  resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
+  integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.8"
@@ -1817,8 +1799,8 @@ emoji-regex@^7.0.1:
 
 emoji-regex@^8.0.0:
   version "8.0.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
-  integrity sha1-6Bj9ac5cz8tARZT4QpY79TFkzDc=
+  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
+  integrity sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
 
 encodeurl@^1.0.2:
   version "1.0.2"
@@ -1940,7 +1922,7 @@ es-to-primitive@^1.2.1:
 
 escalade@^3.1.1:
   version "3.1.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
+  resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
 escape-html@^1.0.3:
@@ -2124,9 +2106,9 @@ fast-levenshtein@~2.0.6:
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
 fast-safe-stringify@^2.0.7:
-  version "2.0.7"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/fast-safe-stringify/-/fast-safe-stringify-2.0.7.tgz#124aa885899261f68aedb42a7c080de9da608743"
-  integrity sha1-EkqohYmSYfaK7bQqfAgN6dpgh0M=
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.1.1.tgz#c406a83b6e70d9e35ce3b30a81141df30aeba884"
+  integrity sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==
 
 fastq@^1.6.0:
   version "1.11.0"
@@ -2549,9 +2531,9 @@ http-signature@~1.2.0:
     sshpk "^1.7.0"
 
 http2-client@^1.2.5:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/http2-client/-/http2-client-1.3.3.tgz#90fc15d646cca86956b156d07c83947d57d659a9"
-  integrity sha512-nUxLymWQ9pzkzTmir24p2RtsgruLmhje7lH3hLX1IpwvyTg77fW+1brenPPP3USAR+rQ36p5sTA/x7sjCJVkAA==
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/http2-client/-/http2-client-1.3.5.tgz#20c9dc909e3cc98284dd20af2432c524086df181"
+  integrity sha512-EC2utToWl4RKfs5zd36Mxq7nzHHBuomZboI0yYL6Y0RmBgT7Sgkq4rQ0ezFTYoIsSs7Tm9SJe+o2FcAg6GBhGA==
 
 human-id@^1.0.2:
   version "1.0.2"
@@ -2755,8 +2737,8 @@ is-fullwidth-code-point@^2.0.0:
 
 is-fullwidth-code-point@^3.0.0:
   version "3.0.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz#f116f8064fe90b3f7844a38997c0b75051269f1d"
-  integrity sha1-8Rb4Bk/pCz94RKOJl8C3UFEmnx0=
+  resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz#f116f8064fe90b3f7844a38997c0b75051269f1d"
+  integrity sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==
 
 is-generator-fn@^2.0.0:
   version "2.1.0"
@@ -4000,43 +3982,23 @@ nwsapi@^2.0.7:
 
 oas-kit-common@^1.0.8:
   version "1.0.8"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/oas-kit-common/-/oas-kit-common-1.0.8.tgz#6d8cacf6e9097967a4c7ea8bcbcbd77018e1f535"
-  integrity sha1-bYys9ukJeWekx+qLy8vXcBjh9TU=
+  resolved "https://registry.yarnpkg.com/oas-kit-common/-/oas-kit-common-1.0.8.tgz#6d8cacf6e9097967a4c7ea8bcbcbd77018e1f535"
+  integrity sha512-pJTS2+T0oGIwgjGpw7sIRU8RQMcUoKCDWFLdBqKB2BNmGpbBMH2sdqAaOXUg8OzonZHU0L7vfJu1mJFEiYDWOQ==
   dependencies:
     fast-safe-stringify "^2.0.7"
 
-oas-linter@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/oas-linter/-/oas-linter-3.2.1.tgz#1a6d9117d146805b58e56df479861de0293b6e5b"
-  integrity sha512-e5G6bbq3Nrfxm+SDPR5AiZ6n2smVUmhLA1OgI2/Bl8e2ywfWsKw/yuqrwiXXiNHb1wdM/GyPMX6QjCGJODlaaA==
-  dependencies:
-    "@exodus/schemasafe" "^1.0.0-rc.2"
-    should "^13.2.1"
-    yaml "^1.10.0"
-
 oas-linter@^3.2.2:
   version "3.2.2"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/oas-linter/-/oas-linter-3.2.2.tgz#ab6a33736313490659035ca6802dc4b35d48aa1e"
+  resolved "https://registry.yarnpkg.com/oas-linter/-/oas-linter-3.2.2.tgz#ab6a33736313490659035ca6802dc4b35d48aa1e"
   integrity sha512-KEGjPDVoU5K6swgo9hJVA/qYGlwfbFx+Kg2QB/kd7rzV5N8N5Mg6PlsoCMohVnQmo+pzJap/F610qTodKzecGQ==
   dependencies:
     "@exodus/schemasafe" "^1.0.0-rc.2"
     should "^13.2.1"
     yaml "^1.10.0"
 
-oas-resolver@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/oas-resolver/-/oas-resolver-2.5.2.tgz#62d26f8db7a4afd697f27ae9b283e79300dd2366"
-  integrity sha512-dEuG5nE9IMl0FQNQuROsoriP4/944PajSBKAoZMyp9b2eXfmPv9ZKeHRCKjf5RWLm0GezaPKcdCLbB0/Xiqtdw==
-  dependencies:
-    node-fetch-h2 "^2.3.0"
-    oas-kit-common "^1.0.8"
-    reftools "^1.1.6"
-    yaml "^1.10.0"
-    yargs "^15.3.1"
-
 oas-resolver@^2.5.6:
   version "2.5.6"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/oas-resolver/-/oas-resolver-2.5.6.tgz#10430569cb7daca56115c915e611ebc5515c561b"
+  resolved "https://registry.yarnpkg.com/oas-resolver/-/oas-resolver-2.5.6.tgz#10430569cb7daca56115c915e611ebc5515c561b"
   integrity sha512-Yx5PWQNZomfEhPPOphFbZKi9W93CocQj18NlD2Pa4GWZzdZpSJvYwoiuurRI7m3SpcChrnO08hkuQDL3FGsVFQ==
   dependencies:
     node-fetch-h2 "^2.3.0"
@@ -4050,23 +4012,9 @@ oas-schema-walker@^1.1.5:
   resolved "https://registry.yarnpkg.com/oas-schema-walker/-/oas-schema-walker-1.1.5.tgz#74c3cd47b70ff8e0b19adada14455b5d3ac38a22"
   integrity sha512-2yucenq1a9YPmeNExoUa9Qwrt9RFkjqaMAA1X+U7sbb0AqBeTIdMHky9SQQ6iN94bO5NW0W4TRYXerG+BdAvAQ==
 
-oas-validator@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/oas-validator/-/oas-validator-5.0.3.tgz#b128d1e0cf7f734e98dbd5fc16037c6907261d93"
-  integrity sha512-PYhenXnQr/T+MmrzBT+cTnyOcIZ4wVzvjS/gvbZZNexnhl1Gu/UiCg6rsEmBetE9CfthoxG0gfGTUSYPRmUlWA==
-  dependencies:
-    call-me-maybe "^1.0.1"
-    oas-kit-common "^1.0.8"
-    oas-linter "^3.2.1"
-    oas-resolver "^2.5.2"
-    oas-schema-walker "^1.1.5"
-    reftools "^1.1.6"
-    should "^13.2.1"
-    yaml "^1.10.0"
-
-oas-validator@^5.0.8:
+oas-validator@^5.0.3, oas-validator@^5.0.8:
   version "5.0.8"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/oas-validator/-/oas-validator-5.0.8.tgz#387e90df7cafa2d3ffc83b5fb976052b87e73c28"
+  resolved "https://registry.yarnpkg.com/oas-validator/-/oas-validator-5.0.8.tgz#387e90df7cafa2d3ffc83b5fb976052b87e73c28"
   integrity sha512-cu20/HE5N5HKqVygs3dt94eYJfBi0TsZvPVXDhbXQHiEityDN+RROTleefoKRKKJ9dFAF2JBkDHgvWj0sjKGmw==
   dependencies:
     call-me-maybe "^1.0.1"
@@ -4580,14 +4528,9 @@ redent@^3.0.0:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
 
-reftools@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/reftools/-/reftools-1.1.6.tgz#841b1ac241259632d63167bf708eccfbfbbba5b5"
-  integrity sha512-rQfJ025lvPjw9qyQuNPqE+cRs5qVs7BMrZwgRJnmuMcX/8r/eJE8f5/RCunJWViXKHmN5K2DFafYzglLOHE/tw==
-
 reftools@^1.1.9:
   version "1.1.9"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/reftools/-/reftools-1.1.9.tgz#e16e19f662ccd4648605312c06d34e5da3a2b77e"
+  resolved "https://registry.yarnpkg.com/reftools/-/reftools-1.1.9.tgz#e16e19f662ccd4648605312c06d34e5da3a2b77e"
   integrity sha512-OVede/NQE13xBQ+ob5CKd5KyeJYU2YInb1bmV4nRoOfquZPkAkxuOXicSe1PvqIuZZ4kD13sPKBbR7UFDmli6w==
 
 regenerator-runtime@^0.13.2:
@@ -4682,7 +4625,7 @@ request@^2.87.0:
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
-  integrity sha1-jGStX9MNqxyXbiNE/+f3kqam30I=
+  integrity sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==
 
 require-from-string@^2.0.2:
   version "2.0.2"
@@ -4891,7 +4834,7 @@ should-equal@^2.0.0:
 should-format@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/should-format/-/should-format-3.0.3.tgz#9bfc8f74fa39205c53d38c34d717303e277124f1"
-  integrity sha1-m/yPdPo5IFxT04w01xcwPidxJPE=
+  integrity sha512-hZ58adtulAk0gKtua7QxevgUaXTTXxIi8t41L3zo9AHvjXO1/7sdLECuHeIN2SRtYXpNkmhoUP2pdeWgricQ+Q==
   dependencies:
     should-type "^1.3.0"
     should-type-adaptors "^1.0.1"
@@ -4907,7 +4850,7 @@ should-type-adaptors@^1.0.1:
 should-type@^1.3.0, should-type@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/should-type/-/should-type-1.4.0.tgz#0756d8ce846dfd09843a6947719dfa0d4cff5cf3"
-  integrity sha1-B1bYzoRt/QmEOmlHcZ36DUz/XPM=
+  integrity sha512-MdAsTu3n25yDbIe1NeN69G4n6mUnJGtSJHygX3+oN0ZbO3DTiATnf7XnYJdGT42JCXurTb1JI0qOBR65shvhPQ==
 
 should-util@^1.0.0:
   version "1.0.1"
@@ -5138,18 +5081,9 @@ string-width@^3.0.0, string-width@^3.1.0:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^5.1.0"
 
-string-width@^4.1.0, string-width@^4.2.0:
-  version "4.2.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/string-width/-/string-width-4.2.0.tgz#952182c46cc7b2c313d1596e623992bd163b72b5"
-  integrity sha1-lSGCxGzHssMT0VluYjmSvRY7crU=
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.0"
-
-string-width@^4.2.3:
+string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
   dependencies:
     emoji-regex "^8.0.0"
@@ -5213,16 +5147,9 @@ strip-ansi@^5.0.0, strip-ansi@^5.1.0, strip-ansi@^5.2.0:
   dependencies:
     ansi-regex "^4.1.0"
 
-strip-ansi@^6.0.0:
-  version "6.0.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/strip-ansi/-/strip-ansi-6.0.0.tgz#0b1571dd7669ccd4f3e06e14ef1eed26225ae532"
-  integrity sha1-CxVx3XZpzNTz4G4U7x7tJiJa5TI=
-  dependencies:
-    ansi-regex "^5.0.0"
-
-strip-ansi@^6.0.1:
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
   dependencies:
     ansi-regex "^5.0.1"
@@ -5715,7 +5642,7 @@ wrap-ansi@^6.2.0:
 
 wrap-ansi@^7.0.0:
   version "7.0.0"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
+  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
@@ -5762,7 +5689,7 @@ y18n@^4.0.0:
 
 y18n@^5.0.5:
   version "5.0.8"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/y18n/-/y18n-5.0.8.tgz#7f4934d0f7ca8c56f95314939ddcd2dd91ce1d55"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-5.0.8.tgz#7f4934d0f7ca8c56f95314939ddcd2dd91ce1d55"
   integrity sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==
 
 yallist@^2.1.2:
@@ -5776,9 +5703,9 @@ yallist@^4.0.0:
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
 yaml@^1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.0.tgz#3b593add944876077d4d683fee01081bd9fff31e"
-  integrity sha512-yr2icI4glYaNG+KWONODapy2/jDdMSDnrONSjblABjD9B4Z5LgiircSt8m8sRZFNi08kG9Sm0uSHtEmP3zaEGg==
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
+  integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
 yargs-parser@10.x:
   version "10.1.0"
@@ -5805,7 +5732,7 @@ yargs-parser@^18.1.2, yargs-parser@^18.1.3:
 
 yargs-parser@^21.1.1:
   version "21.1.1"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/yargs-parser/-/yargs-parser-21.1.1.tgz#9096bceebf990d21bb31fa9516e0ede294a77d35"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.1.1.tgz#9096bceebf990d21bb31fa9516e0ede294a77d35"
   integrity sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==
 
 yargs@^13.3.0:
@@ -5824,7 +5751,7 @@ yargs@^13.3.0:
     y18n "^4.0.0"
     yargs-parser "^13.1.1"
 
-yargs@^15.1.0, yargs@^15.3.1:
+yargs@^15.1.0:
   version "15.4.1"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/yargs/-/yargs-15.4.1.tgz#0d87a16de01aee9d8bec2bfbf74f67851730f4f8"
   integrity sha1-DYehbeAa7p2L7Cv7909nhRcw9Pg=
@@ -5843,7 +5770,7 @@ yargs@^15.1.0, yargs@^15.3.1:
 
 yargs@^17.0.1, yargs@^17.7.1:
   version "17.7.2"
-  resolved "https://packages.atlassian.com/api/npm/npm-remote/yargs/-/yargs-17.7.2.tgz#991df39aca675a192b816e1e0363f9d75d2aa269"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.7.2.tgz#991df39aca675a192b816e1e0363f9d75d2aa269"
   integrity sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==
   dependencies:
     cliui "^8.0.1"
