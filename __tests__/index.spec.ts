@@ -419,7 +419,6 @@ describe('Koa Oas3 with ChowOptions', () => {
     });
     const next = jest.fn();
     await mw(ctx, next);
-    console.log(`ctx.oas: ${JSON.stringify(ctx.oas)}`)
     expect(ctx.oas!.request.params.petId).toBe(pathParam);
   });
 
