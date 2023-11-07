@@ -743,10 +743,10 @@
     jest-diff "^27.0.0"
     pretty-format "^27.0.0"
 
-"@types/js-yaml@3.12.8":
-  version "3.12.8"
-  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-3.12.8.tgz#d47f0ceac930a644266001979d07d7b94808a5c8"
-  integrity sha512-6McoI148SFmiE2m2Y9lpzwN238grgzEn2J1mHoc8UWwDKvAUsjl100jjqoj5ORVqDwWuEmD+zlOES0+jI7fZCA==
+"@types/js-yaml@3.12.10":
+  version "3.12.10"
+  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-3.12.10.tgz#4d80d0c7dfc570eb4f0be280cb2d67789f977ba5"
+  integrity sha512-/Mtaq/wf+HxXpvhzFYzrzCqNRcA958sW++7JOFC8nPrZcvfi/TrzOaaGbvt27ltJB2NQbHVAg5a1wUCsyMH7NA==
 
 "@types/json-schema@^7.0.13":
   version "7.0.13"
