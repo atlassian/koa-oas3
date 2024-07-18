@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 3.0.1
+
+### Patch Changes
+
+- 18ddb6f: Bump qs version
+
 ## 3.0.0
 
 ### Major Changes
