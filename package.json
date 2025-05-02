@@ -45,7 +45,7 @@
     "@types/qs": "^6.9.7",
     "jest": "24.9.0",
     "koa": "2.11.0",
-    "node-mocks-http": "1.10.1",
+    "node-mocks-http": "1.17.2",
     "ts-jest": "24.3.0",
     "typescript": "5.2.2"
   },
