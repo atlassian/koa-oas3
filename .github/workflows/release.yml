@@ -13,14 +13,13 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits 
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
 
-
-      - name: Setup Node.js 16.x
+      - name: Setup Node.js 22.x
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: 22.x
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
