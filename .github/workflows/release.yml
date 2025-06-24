@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js 16.x
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: 22.x
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
