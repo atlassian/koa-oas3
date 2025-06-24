@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 3.2.0
+
+### Minor Changes
+
+- 16c2776: Upgraded dependencies and now allow Koa Version 3. Fixed commas instead of semi-colons in config.
+
 ## 3.1.0
 
 ### Minor Changes
