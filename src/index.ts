@@ -1,6 +1,10 @@
 import * as koa from 'koa';
 import { Config, validateConfig } from './config';
-import ChowChow, { ChowError, RequestValidationError, ResponseValidationError } from 'oas3-chow-chow';
+import ChowChow, {
+  ChowError,
+  RequestValidationError,
+  ResponseValidationError
+} from 'oas3-chow-chow';
 import { openapiUI } from './openapi-ui';
 import * as jsonfile from 'jsonfile';
 import * as yaml from 'js-yaml';
@@ -25,7 +29,7 @@ export type Oas = {
     params?: any;
   };
   operationId?: any;
-}
+};
 
 declare module 'koa' {
   interface Context {
@@ -33,32 +37,36 @@ declare module 'koa' {
   }
 }
 
-
 export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
-
   const config = validateConfig(cfg);
   const { compiled, doc } = await compileOas(config);
 
-  const validatorMW: koa.Middleware = async (ctx: koa.Context & { params?: any }, next: () => Promise<any>): Promise<void> => {
+  const validatorMW: koa.Middleware = async (
+    ctx: koa.Context & { params?: any },
+    next: () => Promise<any>
+  ): Promise<void> => {
     try {
-      const validRequest = compiled.validateRequestByPath(ctx.path, ctx.request.method, {
-        header: ctx.request.header,
-        query: qs.parse(ctx.request.querystring, config.qsParseOptions),
-        path: ctx.params,
-        cookie: ctx.cookies,
-        body: (ctx.request as RequestWithBody).body,
-      });
+      const validRequest = compiled.validateRequestByPath(
+        ctx.path,
+        ctx.request.method,
+        {
+          header: ctx.request.header,
+          query: qs.parse(ctx.request.querystring, config.qsParseOptions),
+          path: ctx.params,
+          cookie: ctx.cookies,
+          body: (ctx.request as RequestWithBody).body
+        }
+      );
 
       // Store coerced values
       ctx.oas = {
         request: {
           query: validRequest.query,
           params: validRequest.path,
-          header: validRequest.header,
+          header: validRequest.header
         },
         operationId: validRequest.operationId
       };
-
     } catch (err) {
       config.errorHandler(err, ctx);
     }
@@ -71,14 +79,17 @@ export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
           status: ctx.status,
           header: ctx.response.header,
           body: ctx.body
-        })
-      } catch(err) {
+        });
+      } catch (err) {
         config.errorHandler(err, ctx);
       }
     }
   };
 
-  const composedMW: koa.Middleware = async (ctx: koa.Context & { params?: any }, next: () => Promise<any>): Promise<void> => {
+  const composedMW: koa.Middleware = async (
+    ctx: koa.Context & { params?: any },
+    next: () => Promise<any>
+  ): Promise<void> => {
     if (config.enableUi && ctx.path === config.endpoint) {
       ctx.body = doc;
       return;
@@ -99,60 +110,74 @@ export async function oas(cfg: Partial<Config>): Promise<koa.Middleware> {
     }
 
     const middlewares: Array<koa.Middleware> = [];
-    const requestContentTypes = compiled.getDefinedRequestBodyContentType(ctx.path, ctx.request.method);
+    const requestContentTypes = compiled.getDefinedRequestBodyContentType(
+      ctx.path,
+      ctx.request.method
+    );
     const matchedContentType = ctx.request.is(requestContentTypes);
-    if (requestContentTypes.length && config.requestBodyHandler && matchedContentType && typeof matchedContentType === 'string') {
+    if (
+      requestContentTypes.length &&
+      config.requestBodyHandler &&
+      matchedContentType &&
+      typeof matchedContentType === 'string'
+    ) {
       // We need to find the most specific matched handler
       const parts = matchedContentType.split('/');
       if (config.requestBodyHandler[matchedContentType]) {
-        middlewares.push(config.requestBodyHandler[matchedContentType]);  // For a specific match like `application/json`
+        middlewares.push(config.requestBodyHandler[matchedContentType]); // For a specific match like `application/json`
       } else if (config.requestBodyHandler[`${parts[0]}/*`]) {
-        middlewares.push(config.requestBodyHandler[`${parts[0]}/*`]);  // For a match like `application/*`
+        middlewares.push(config.requestBodyHandler[`${parts[0]}/*`]); // For a match like `application/*`
       } else if (config.requestBodyHandler[`*/${parts[1]}`]) {
-        middlewares.push(config.requestBodyHandler[`*/${parts[1]}`]);  // For a match like `*/json`
+        middlewares.push(config.requestBodyHandler[`*/${parts[1]}`]); // For a match like `*/json`
       } else if (config.requestBodyHandler['*/*']) {
-        middlewares.push(config.requestBodyHandler['*/*']);  // For a global type match defined as `*/*`
+        middlewares.push(config.requestBodyHandler['*/*']); // For a global type match defined as `*/*`
       }
     }
 
     middlewares.push(validatorMW);
     await compose(middlewares).call(this, ctx, next);
-  }
+  };
 
   return composedMW;
 }
 
 async function loadFromFile(file?: string): Promise<any> {
-    if (!file) {
-        throw new Error("Missing file path");
+  if (!file) {
+    throw new Error('Missing file path');
+  }
+  switch (true) {
+    case file.endsWith('.json'): {
+      return jsonfile.readFile(file);
     }
-    switch (true) {
-        case file.endsWith('.json'): {
-            return jsonfile.readFile(file);
-        }
-        case file.endsWith('.yml') || file.endsWith('.yaml'): {
-            return yaml.safeLoad(await readFile(file, { encoding: 'utf8' }));
-        }
-        default:
-            throw new Error('Unsupported file format');
+    case file.endsWith('.yml') || file.endsWith('.yaml'): {
+      return yaml.load(await readFile(file, { encoding: 'utf8' }));
     }
+    default:
+      throw new Error('Unsupported file format');
+  }
 }
 
 async function compileOas(config: Config) {
-  let openApiObject: any = config.spec || await loadFromFile(config.file);
+  let openApiObject: any = config.spec || (await loadFromFile(config.file));
   try {
-    await oasValidator.validateInner(openApiObject, config.oasValidatorOptions || {});
+    await oasValidator.validateInner(
+      openApiObject,
+      config.oasValidatorOptions || {}
+    );
   } catch (err) {
     throw new Error('Invalid Openapi document' + err.message);
   }
 
   return {
     compiled: await ChowChow.create(openApiObject, config.validationOptions),
-    doc: openApiObject,
+    doc: openApiObject
   };
 }
 
-function skipValidation(validatePaths: Array<string | RegExp>, ctx: koa.Context) {
+function skipValidation(
+  validatePaths: Array<string | RegExp>,
+  ctx: koa.Context
+) {
   let dontValidate = !validatePaths.some((path: string | RegExp) => {
     if (path instanceof RegExp) {
       return path.test(ctx.path);

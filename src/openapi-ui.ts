@@ -4,7 +4,8 @@ export interface OpenapiUIConfig {
   swaggerUiBundleBasePath: string;
 }
 
-export function openapiUI(cfg: OpenapiUIConfig): string { return `
+export function openapiUI(cfg: OpenapiUIConfig): string {
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head>

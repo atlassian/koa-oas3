@@ -15,19 +15,25 @@ describe('Koa Oas3', () => {
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
       validatePaths: ['/pets'],
-      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+      validationOptions: {
+        requestBodyAjvOptions: { allErrors: true }
+      } as ChowOptions
     });
-  })
+  });
 
   test('It should throw error if invalid Openapi document is passed', async () => {
-    return expect(oas({
-      file: path.resolve('./__tests__/fixtures/broken.json'),
-      endpoint: '/openapi',
-      uiEndpoint: '/openapi.html',
-      validatePaths: ['/pets'],
-      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
-    })).rejects.toThrow('Invalid Openapi document');
-  })
+    return expect(
+      oas({
+        file: path.resolve('./__tests__/fixtures/broken.json'),
+        endpoint: '/openapi',
+        uiEndpoint: '/openapi.html',
+        validatePaths: ['/pets'],
+        validationOptions: {
+          requestBodyAjvOptions: { allErrors: true }
+        } as ChowOptions
+      })
+    ).rejects.toThrow('Invalid Openapi document');
+  });
 
   test('It should return raw Openapi doc with defined path', async () => {
     const ctx = createContext({
@@ -37,7 +43,7 @@ describe('Koa Oas3', () => {
     const next = jest.fn();
     await mw(ctx, next);
     expect(next.mock.calls.length).toBe(0);
-    expect(ctx.body.openapi).toBe('3.0.0');
+    expect((ctx.body as { openapi: string }).openapi).toBe('3.0.0');
   });
 
   test('It should return openapi UI page with defined path', async () => {
@@ -57,7 +63,7 @@ describe('Koa Oas3', () => {
       url: '/pets',
       method: 'POST',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'application/json'
       },
       body: {
@@ -76,22 +82,22 @@ describe('Koa Oas3', () => {
     const ctx = createContext({
       url: '/pets?limit=10&type[color]=red&fields=name,age,breed',
       headers: {
-        'accept': 'application/json'
+        accept: 'application/json'
       },
       method: 'GET'
     });
     const next = jest.fn();
     await mw(ctx, next);
     expect(ctx.oas!.request.query.limit).toBe(10);
-    expect(ctx.oas!.request.query.type).toEqual({color: 'red'});
-    expect(ctx.oas!.request.query.fields).toEqual(['name','age','breed']);
+    expect(ctx.oas!.request.query.type).toEqual({ color: 'red' });
+    expect(ctx.oas!.request.query.fields).toEqual(['name', 'age', 'breed']);
   });
 
-  test('It should parse out operationId for GET', async() => {
+  test('It should parse out operationId for GET', async () => {
     const ctx = createContext({
       url: '/pets?limit=10&type[color]=red&fields=name,age,breed',
       headers: {
-        'accept': 'application/json'
+        accept: 'application/json'
       },
       method: 'GET'
     });
@@ -100,11 +106,11 @@ describe('Koa Oas3', () => {
     expect(ctx.oas!.operationId).toEqual('listPets');
   });
 
-  test('It should parse out operationId for POST', async() => {
+  test('It should parse out operationId for POST', async () => {
     const ctx = createContext({
       url: '/pets',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'application/json'
       },
       method: 'POST',
@@ -119,11 +125,11 @@ describe('Koa Oas3', () => {
     expect(ctx.oas!.operationId).toEqual('createPets');
   });
 
-  test('It should parse out operationId for PUT', async() => {
+  test('It should parse out operationId for PUT', async () => {
     const ctx = createContext({
       url: '/pets',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'audio/aac'
       },
       method: 'PUT'
@@ -135,48 +141,50 @@ describe('Koa Oas3', () => {
 
   describe('Throw ValidationError', () => {
     test('Is should throw ValidationError if validation failed for object type query params', () => {
-        const ctx = createContext({
-            url: '/pets?type[color]=grey',
-            headers: {
-              'accept': 'application/json'
-            },
-            method: 'GET'
-          });
-          const next = jest.fn();
-          return expect(mw(ctx, next)).rejects.toThrow();
+      const ctx = createContext({
+        url: '/pets?type[color]=grey',
+        headers: {
+          accept: 'application/json'
+        },
+        method: 'GET'
+      });
+      const next = jest.fn();
+      return expect(mw(ctx, next)).rejects.toThrow();
     });
     test('It should throw ValidationError if validation failed', () => {
-        const ctx = createContext({
-          url: '/pets',
-          headers: {
-            'accept': 'application/json',
-            'content-type': 'application/json'
-          },
-          method: 'POST',
-          body: {
-            id: 1,
-            tag: 'tag'
-          }
-        });
-        const next = jest.fn();
-        return expect(mw(ctx, next)).rejects.toThrow();
+      const ctx = createContext({
+        url: '/pets',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json'
+        },
+        method: 'POST',
+        body: {
+          id: 1,
+          tag: 'tag'
+        }
       });
+      const next = jest.fn();
+      return expect(mw(ctx, next)).rejects.toThrow();
+    });
   });
 
   test('Should custom error handler work', async () => {
     const next = jest.fn();
-    const errorHandler = jest.fn((err) => { throw err });
+    const errorHandler = jest.fn((err) => {
+      throw err;
+    });
     const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
       validatePaths: ['/pets'],
-      errorHandler,
+      errorHandler
     });
     const ctx = createContext({
       url: '/pets',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'application/json'
       },
       method: 'POST',
@@ -187,17 +195,19 @@ describe('Koa Oas3', () => {
     });
 
     await expect(mw(ctx, next)).rejects.toThrow();
-    expect(errorHandler).toBeCalled();
+    expect(errorHandler).toHaveBeenCalled();
   });
 
   test('It should pick the correct body handler for content type', async () => {
     const next = jest.fn();
-    const bodyHandler = jest.fn().mockImplementation(bodyParser({
-      extendTypes: {
-        json: ['application/json']
-      },
-      enableTypes: ['json']
-    }));
+    const bodyHandler = jest.fn().mockImplementation(
+      bodyParser({
+        extendTypes: {
+          json: ['application/json']
+        },
+        enableTypes: ['json']
+      })
+    );
     const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
@@ -210,7 +220,7 @@ describe('Koa Oas3', () => {
     const ctx = createContext({
       url: '/pets',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'application/json'
       },
       method: 'POST',
@@ -221,17 +231,19 @@ describe('Koa Oas3', () => {
       }
     });
     await expect(mw(ctx, next)).resolves.toEqual(undefined);
-    expect(bodyHandler).toBeCalled();
+    expect(bodyHandler).toHaveBeenCalled();
   });
 
   test('It should pick the most specific body handler for content type', async () => {
     const next = jest.fn();
-    const bodyHandler = jest.fn().mockImplementation(bodyParser({
-      extendTypes: {
-        json: ['application/json']
-      },
-      enableTypes: ['json']
-    }));
+    const bodyHandler = jest.fn().mockImplementation(
+      bodyParser({
+        extendTypes: {
+          json: ['application/json']
+        },
+        enableTypes: ['json']
+      })
+    );
     const anotherBodyHandler = jest.fn();
     const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
@@ -246,7 +258,7 @@ describe('Koa Oas3', () => {
     const ctx = createContext({
       url: '/pets',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'application/json'
       },
       method: 'POST',
@@ -265,7 +277,7 @@ describe('Koa Oas3', () => {
     const ctx = createContext({
       url: '/pets/123',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'application/xml'
       },
       method: 'POST',
@@ -276,19 +288,21 @@ describe('Koa Oas3', () => {
       }
     });
     const next = jest.fn();
-    const bodyHandler = jest.fn().mockImplementation(bodyParser({
-      extendTypes: {
-        json: ['application/xml']
-      },
-      enableTypes: ['json']
-    }));
+    const bodyHandler = jest.fn().mockImplementation(
+      bodyParser({
+        extendTypes: {
+          json: ['application/xml']
+        },
+        enableTypes: ['json']
+      })
+    );
     const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
       validatePaths: ['/pets'],
       requestBodyHandler: {
-        'application/xml': bodyHandler,
+        'application/xml': bodyHandler
       }
     });
     await expect(mw(ctx, next)).resolves.toEqual(undefined);
@@ -299,7 +313,7 @@ describe('Koa Oas3', () => {
     const ctx = createContext({
       url: '/pets/123',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'application/json'
       },
       method: 'PUT',
@@ -310,19 +324,21 @@ describe('Koa Oas3', () => {
       }
     });
     const next = jest.fn();
-    const bodyHandler = jest.fn().mockImplementation(bodyParser({
-      extendTypes: {
-        json: ['application/json']
-      },
-      enableTypes: ['json']
-    }));
+    const bodyHandler = jest.fn().mockImplementation(
+      bodyParser({
+        extendTypes: {
+          json: ['application/json']
+        },
+        enableTypes: ['json']
+      })
+    );
     const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
       validatePaths: ['/pets'],
       requestBodyHandler: {
-        'application/json': bodyHandler,
+        'application/json': bodyHandler
       }
     });
     await expect(mw(ctx, next)).resolves.toEqual(undefined);
@@ -333,7 +349,7 @@ describe('Koa Oas3', () => {
     const ctx = createContext({
       url: '/pets/123',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'audio/aac'
       },
       method: 'PUT',
@@ -344,25 +360,27 @@ describe('Koa Oas3', () => {
       }
     });
     const next = jest.fn();
-    const bodyHandler = jest.fn().mockImplementation(bodyParser({
-      extendTypes: {
-        json: ['application/json']
-      },
-      enableTypes: ['json']
-    }));
+    const bodyHandler = jest.fn().mockImplementation(
+      bodyParser({
+        extendTypes: {
+          json: ['application/json']
+        },
+        enableTypes: ['json']
+      })
+    );
     const mw = await oas({
       file: path.resolve('./__tests__/fixtures/pet-store.json'),
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
       validatePaths: ['/pets'],
       requestBodyHandler: {
-        'application/json': bodyHandler,
+        'application/json': bodyHandler
       }
     });
     await expect(mw(ctx, next)).resolves.toEqual(undefined);
     expect(bodyHandler).not.toHaveBeenCalled();
   });
-})
+});
 
 describe('Koa Oas3 with ChowOptions', () => {
   let mw: koa.Middleware;
@@ -373,15 +391,17 @@ describe('Koa Oas3 with ChowOptions', () => {
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
       validatePaths: ['/'],
-      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+      validationOptions: {
+        requestBodyAjvOptions: { allErrors: true }
+      } as ChowOptions
     });
-  })
+  });
 
   test('It should coerce values if validation passed', async () => {
     const ctx = createContext({
       url: '/pets?limit=10',
       headers: {
-        'accept': 'application/json'
+        accept: 'application/json'
       },
       method: 'GET'
     });
@@ -394,7 +414,7 @@ describe('Koa Oas3 with ChowOptions', () => {
     const ctx = createContext({
       url: '/pets',
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'content-type': 'application/json'
       },
       method: 'POST',
@@ -405,7 +425,7 @@ describe('Koa Oas3 with ChowOptions', () => {
     });
     const next = jest.fn();
     return expect(mw(ctx, next)).rejects.toThrow();
-  })
+  });
 
   test('ctx.oas.request.params populated with path param if validation passed', async () => {
     const pathParam = 345;
@@ -413,7 +433,7 @@ describe('Koa Oas3 with ChowOptions', () => {
     const ctx = createContext({
       url: `/pets/${pathParam}`,
       headers: {
-        'accept': 'application/json'
+        accept: 'application/json'
       },
       method: 'GET'
     });
@@ -421,8 +441,7 @@ describe('Koa Oas3 with ChowOptions', () => {
     await mw(ctx, next);
     expect(ctx.oas!.request.params.petId).toBe(pathParam);
   });
-
-})
+});
 
 describe('Pass Regex Array as a validatePaths option', () => {
   let mw: koa.Middleware;
@@ -434,15 +453,17 @@ describe('Pass Regex Array as a validatePaths option', () => {
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
       validatePaths: [new RegExp(`pets(?!/${pathParam})`)],
-      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+      validationOptions: {
+        requestBodyAjvOptions: { allErrors: true }
+      } as ChowOptions
     });
-  })
+  });
 
   test('should NOT validate paths specified that do not validate against the RegExp pattern', async () => {
     const ctx = createContext({
       url: `/pets/${pathParam}`,
       headers: {
-        'accept': 'application/json'
+        accept: 'application/json'
       },
       method: 'GET'
     });
@@ -452,7 +473,9 @@ describe('Pass Regex Array as a validatePaths option', () => {
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
       validatePaths: [new RegExp(`pets(?!/${pathParam})`)],
-      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+      validationOptions: {
+        requestBodyAjvOptions: { allErrors: true }
+      } as ChowOptions
     });
 
     const next = jest.fn();
@@ -460,13 +483,13 @@ describe('Pass Regex Array as a validatePaths option', () => {
 
     expect(next).toHaveBeenCalledTimes(1);
     expect(next).toHaveBeenCalledWith();
-  })
+  });
 
   test('should validate paths specified in RegExp pattern', async () => {
     const ctx = createContext({
       url: `/pets/`,
       headers: {
-        'accept': 'application/json'
+        accept: 'application/json'
       },
       method: 'GET'
     });
@@ -476,7 +499,9 @@ describe('Pass Regex Array as a validatePaths option', () => {
       endpoint: '/openapi',
       uiEndpoint: '/openapi.html',
       validatePaths: [new RegExp(`pets(?!/${pathParam})`)],
-      validationOptions: { requestBodyAjvOptions: { allErrors: true } } as ChowOptions
+      validationOptions: {
+        requestBodyAjvOptions: { allErrors: true }
+      } as ChowOptions
     });
 
     const next = jest.fn();
@@ -484,6 +509,5 @@ describe('Pass Regex Array as a validatePaths option', () => {
 
     expect(next).toHaveBeenCalledTimes(1);
     expect(next).not.toHaveBeenCalledWith();
-  })
-
-})
+  });
+});
