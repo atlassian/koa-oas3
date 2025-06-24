@@ -21,19 +21,19 @@ yarn add koa-oas3
 By default, this library will use `koa-bodyparser` to parse request body. See config of `requestBodyHandler`.
 
 ```ts
-import * as bodyParser from 'koa-bodyparser'
-import { oas } from 'koa-oas3'
+import * as bodyParser from 'koa-bodyparser';
+import { oas } from 'koa-oas3';
 
-const app = new Koa()
-app.use(bodyParser())
+const app = new Koa();
+app.use(bodyParser());
 const oasMw = await oas({
   file: `${__dirname}/../openapi.yaml`,
   endpoint: '/openapi.json',
   uiEndpoint: '/'
-})
-app.use(oasMw)
+});
+app.use(oasMw);
 
-app.listen(8080)
+app.listen(8080);
 ```
 
 ### oas(option)
