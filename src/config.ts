@@ -11,11 +11,11 @@ export interface Config {
   /**
    * Openapi document as a javascript object
    */
-  spec?: object,
+  spec?: object;
   /**
    * Whether to enable OpenAPI UI display and OpenAPI doc display
    */
-  enableUi?: boolean,
+  enableUi?: boolean;
   /**
    * Endpoint that serves raw Openapi Document in JSON
    * default: /openapi.json
@@ -42,7 +42,7 @@ export interface Config {
   /**
    * Optional custom error handler
    */
-  errorHandler: (error: Error, ctx: Context)=> void,
+  errorHandler: (error: Error, ctx: Context) => void;
   /**
    * Body handlers to different request content-types
    * default:
@@ -53,7 +53,7 @@ export interface Config {
    * }
    */
   requestBodyHandler?: {
-    [key: string]: Middleware
+    [key: string]: Middleware;
   };
   /**
    * Optional options for sending to oas3-chow-chow/AJV
@@ -77,7 +77,9 @@ function defaultErrorHandler(err: Error, ctx: Context) {
 
 export function validateConfig(cfg: Partial<Config>): Config {
   if (!cfg.file && !cfg.spec) {
-    throw new Error('You must configure a Openapi File or a OpenAPIObject object');
+    throw new Error(
+      'You must configure a Openapi File or a OpenAPIObject object'
+    );
   }
   return {
     file: cfg.file,
@@ -87,7 +89,8 @@ export function validateConfig(cfg: Partial<Config>): Config {
     uiEndpoint: cfg.uiEndpoint || '/openapi.html',
     validateResponse: cfg.validateResponse || false,
     validatePaths: cfg.validatePaths || ['/'],
-    swaggerUiBundleBasePath: cfg.swaggerUiBundleBasePath || '//unpkg.com/swagger-ui-dist@3/',
+    swaggerUiBundleBasePath:
+      cfg.swaggerUiBundleBasePath || '//unpkg.com/swagger-ui-dist@3/',
     errorHandler: cfg.errorHandler || defaultErrorHandler,
     qsParseOptions: cfg.qsParseOptions || { comma: true },
     requestBodyHandler: cfg.requestBodyHandler || {
