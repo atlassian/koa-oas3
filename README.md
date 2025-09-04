@@ -1,6 +1,6 @@
 # koa-oas3
 
-Request and Response validator for OpenAPI Specification 3.
+Request and Response validator for OpenAPI Specification 3..
 
 ## Installation
 
