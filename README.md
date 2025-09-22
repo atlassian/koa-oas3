@@ -1,19 +1,20 @@
-# koa-oas3
+# @atlassian/koa-oas3
 
 Request and Response validator for OpenAPI Specification 3.
+Note: Starting from version 4, it's transferred to be under `@atlassian` scope.
 
 ## Installation
 
 ### npm
 
 ```sh
-npm install --save koa-oas3
+npm install --save @atlassian/koa-oas3
 ```
 
 ### yarn
 
 ```sh
-yarn add koa-oas3
+yarn add @atlassian/koa-oas3
 ```
 
 ## API
@@ -22,7 +23,7 @@ By default, this library will use `koa-bodyparser` to parse request body. See co
 
 ```ts
 import * as bodyParser from 'koa-bodyparser';
-import { oas } from 'koa-oas3';
+import { oas } from '@atlassian/koa-oas3';
 
 const app = new Koa();
 app.use(bodyParser());

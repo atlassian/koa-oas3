@@ -1,10 +1,13 @@
 {
-  "name": "koa-oas3",
+  "name": "@atlassian/koa-oas3",
   "version": "3.2.0",
   "main": "lib/index.js",
   "types": "lib/index.d.js",
   "author": "<tli@atlassian.com>",
   "license": "Apache-2.0",
+  "publishConfig": {
+		"registry": "https://packages.atlassian.com/api/npm/npm-public/"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest --coverage --no-watchman",
