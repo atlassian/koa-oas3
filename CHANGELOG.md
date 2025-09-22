@@ -1,5 +1,11 @@
 # koa-oas3
 
+## 4.0.0
+
+### Major Changes
+
+- 5b71c0f: Migrate to @atlassian scope
+
 ## 3.2.0
 
 ### Minor Changes
