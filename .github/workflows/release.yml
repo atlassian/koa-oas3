@@ -9,7 +9,8 @@ jobs:
   release:
     # minimal permissions 
     permissions:
-        contents: read
+        pull-requests: write
+        contents: write
         id-token: write
     name: Release
     runs-on: ubuntu-latest
